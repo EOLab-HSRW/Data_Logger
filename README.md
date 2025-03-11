@@ -40,4 +40,46 @@ Files included in the Projectfolder.
         - Water Pressure
 
 
-## Data Encryption for EEPROM
+## Datastoring Simulation for EEPROM
+
+Restriction : 2MB
+
+Assuming that 7 Values has to be stored at each iteration, the folllowing result occurs:
+
+2^20 * 2 = 2.097.152 Bits
+
+2 Options are available:
+
+1) No Efficiency:
+
+- 1x 32 Bit (Unix Timestamp)
+- 1x 32 Bit (Temprature)
+- 1x 32 Bit (Pressure)
+- 1x 32 Bit (Humidity)
+- 1x 32 Bit (Gas)
+- 1x 32 Bit (Water Pressure / Liquid Level)
+- 1x 32 Bit (Voltage Level)
+
+Total : 224 Bits
+
+2^20 * 2 / 224 = 9362.28571429
+
+
+2) With Efficiency
+
+- 1x 32 Bit (Unix Timestamp)
+- 1x 16 Bit (Temprature)
+- 1x 32 Bit (Pressure)
+- 1x 16 Bit (Humidity)
+- 1x 32 Bit (Gas)
+- 1x 32 Bit (Water Pressure / Liquid Level)
+- 1x 16 Bit (Voltage Level)
+
+Total : 144 Bits
+
+2^20 * 2 / 144 = 14563.5555556
+
+
+### Result
+
+There exists a difference between the two options of an amount of 5201 Iterations.
