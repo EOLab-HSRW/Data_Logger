@@ -42,7 +42,17 @@ Files included in the Projectfolder.
 
 ## Datastoring Simulation for EEPROM
 
-Restriction : 2MB
+Propertys:
+- 1 Million Writing Cycles (until it gets unreliable)
+- 2Mb (2^20 (2.097.152)) Bits orginized as 262.144 Words (in 8 Bit Format).
+- Standby Current (3 micro Ampere)
+- 256 Bytes Page Write Mode (in one step (for reducing to much cycles for efficiency))
+- 3.3V Input (Can be controlled from the Core (On/Off))
+
+Restriction : 
+
+- 2MB
+- at least 2-3 Month endurance
 
 Assuming that 7 Values has to be stored at each iteration, the folllowing result occurs:
 
