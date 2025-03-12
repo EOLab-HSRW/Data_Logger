@@ -21,7 +21,7 @@ This project simplifies data logging to external storage (SD card / EEPROM).
 | RAK5802    | 07.97     | Reserved                                    |
 | RAK1906    | 20.21     | Environmental sensor module                 |
 | RS485      | -         | Liquid level sensor + connector             |
-| **Total**  | **85.86** |                                              |
+| **Total**  | **95,36** |                                              |
 
 ## Documentation
 
