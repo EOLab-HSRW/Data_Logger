@@ -22,43 +22,41 @@ For Data Sheets, Quick Guides and Description : docs.RawWireless.com
 
 ## Used Software
 
-The Arduino IDE was used.
-Files included in the Projectfolder.
+The Arduino IDE is used.
+Files are included in the Projectfolder.
 
 ## Data Types
+    1) Timestamp
+    2) Environment Sensor:
+    * Temprature
+    * Pressure
+    * Humidity
+    * Gas
 
-- Timestamp
-
-- Environment Sensor:
-        - Temprature
-        - Pressure
-        - Humidity
-        - Gas
-
-- Liquid Level Sensor:
-        - Liquid Level
-        - Water Pressure
+    3) Liquid Level Sensor:
+    * Liquid Level
+    * Water Pressure
 
 
 ## Datastoring Simulation for EEPROM
 
-Propertys:
+### Property's:
 - 1 Million Writing Cycles (until it gets unreliable)
 - 2Mb (2^20 (2.097.152)) Bits orginized as 262.144 Words (in 8 Bit Format).
 - Standby Current (3 micro Ampere)
-- 256 Bytes Page Write Mode (in one step (for reducing to much cycles for efficiency))
+- 256 Bytes Page Write Mode (in one step (for reducing rapid wear))
 - 3.3V Input (Can be controlled from the Core (On/Off))
 
-Restriction : 
-
+### Restriction's: 
 - 2MB
 - at least 2-3 Month endurance
 
+### Calculation :
 Assuming that 7 Values has to be stored at each iteration, the folllowing result occurs:
 
 2^20 * 2 = 2.097.152 Bits
 
-2 Options are available:
+Two Options are available:
 
 1) No Efficiency:
 
