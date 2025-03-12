@@ -15,6 +15,7 @@ This project simplifies data logging to external storage (SD card / EEPROM).
 | RAK19002   | 06.65     | Power slot module (Li-Ion, USB-C, Solar)     |
 | RAK15000   | 15.96     | EEPROM module                               |
 | RAK15002   | 04.90     | SD card module                              |
+| RAK12002   | 09.50     | RTC Module                                  |
 | RAK19011   | -         | Reserved                                    |
 | RAK19012   | -         | Reserved                                    |
 | RAK5802    | 07.97     | Reserved                                    |
