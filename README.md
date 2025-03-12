@@ -7,16 +7,17 @@ This Project aims to ease the Process of logging Data on an external Storage (SD
 ## Used Hardware
 
 - RawWireless Wisblock:
-    - RAK11200 (ESP32 based inkl. WiFi,BLE)
-    - RAK11310 (Raspberry Pi based inkl. Lora Transceiver)
-    - RAK19002 (Power Slot Module e.g (Li-Ionen, USB-C, Solar))
-    - RAK15000 (EEPROM Module)
-    - RAK15002 (SD-Card Module)
-    - RAK19011
-    - RAK19012
-    - RAK5802
-    - RAK1906  (Environment Sensor Module)
-    - RS485    (Liquid Level Sensor + Connector)
+    - RAK11200 13.16€ (ESP32 based inkl. WiFi,BLE)
+    - RAK11310 17.01€ (Raspberry Pi based inkl. Lora Transceiver)
+    - RAK19002 06.65€ (Power Slot Module e.g (Li-Ionen, USB-C, Solar))
+    - RAK15000 15.96€ (EEPROM Module)
+    - RAK15002 04.90€ (SD-Card Module)
+    - RAK19011 -
+    - RAK19012 -
+    - RAK5802  7.97€
+    - RAK1906  20.21€ (Environment Sensor Module)
+    - RS485    -      (Liquid Level Sensor + Connector)
+      Total = 85.86€
 
 For Data Sheets, Quick Guides and Description : docs.RawWireless.com
 
