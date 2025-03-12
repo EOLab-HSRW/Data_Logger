@@ -78,12 +78,12 @@ Total : 224 Bits
 2) With Efficiency
 
 - 1x 32 Bit (Unix Timestamp)
-- 1x 16 Bit (Temprature)
+- 1x 16 Bit (Temprature -40°C - 100°C)
 - 1x 32 Bit (Pressure)
-- 1x 16 Bit (Humidity)
+- 1x 16 Bit (Humidity 0%-100%)
 - 1x 32 Bit (Gas)
-- 1x 32 Bit (Water Pressure / Liquid Level)
-- 1x 16 Bit (Voltage Level)
+- 1x 32 Bit (Water Pressure / Liquid Level 0-5000)
+- 1x 16 Bit (Voltage Level 0-24)
 
 Total : 144 Bits
 
@@ -93,3 +93,62 @@ Total : 144 Bits
 ### Result
 
 There exists a difference between the two options of an amount of 5201 Iterations.
+
+### EEPROM RAK15000 
+
+This module orginizes the Storage as 4x 64Kb Blocks .
+To choose between these Blocks the I2C Communication is used.
+The Storage is linear sequential but with a structered format of 8 Bits -> 1 Byte at each Address.
+The Address Schema is as follows:
+
+3 Bit Address (For I2C) : 
+
+        1) 000 -> Block 0 (0x00000 - 0x0FFFF)
+        2) 001 -> Block 1 (0x10000 - 0x1FFFF)
+        3) 010 -> Block 2 (0x20000 - 0x2FFFF)
+        4) 011 -> Block 3 (0x30000 - 0x3FFFF)
+
+### EEPROM RAK11200 (internal)
+
+This Module has an internal EEPROM which has a size of 64Kb (524.288 Bits).
+So it doesn't need a Block Switch Control.
+It is also linear sequential but has no special format structure like the RAK15000.
+It is possible that it has already configuration data on it at the purchase to ease the Connection Process for LoRaWan.
+
+The Addres Schema:
+        
+        1) 0x0000 - 0xFFFF 
+
+
+### Data Storage Management
+
+For this Project we will use the first 5 Bytes to save two Counters to keep track of the Process Status.
+
+Included are these two Data: 
+
+        1) Writing Counter for Total Writing Amount (20 Bit) 
+        2) Storage Position Counter for keep tracking the next Writable Address (20 Bit)
+
+
+The Writing Counter has to be stored globally once and seperatly because the possible cycle of writing is exactly 1 Million Times until it gets unreliable.
+Storing this amount requires at least 20 Bits for the Value 1 Million (0xF4240).
+So the Starting first 20 Bits are reserved for the Total Amount Counter.
+
+
+Storage Position Counter needs to be also 16 Bits.
+Because of 65536 possible entrys, we can determine the needed amount of Bits to at least 16 Bit for the Writing Counter for each Block. 
+Thats the maximum amount of entrys we can get into our EEPROM if we divide the Meta Data in the several Blocks.
+
+
+### EEPROM Decoder
+
+After every Switch of Context or Sensor Change, the Data has to be decoded.
+A Seperate Sketch will be included in the Projectfolder soon.
+
+
+
+### Erasing Data before switching Context / Sensors
+
+After every Switch of Context or Sensor Change, the Data has to ereased to avoid Data conflicts.
+A Seperate Sketch will be included in the Projectfolder soon.
+
