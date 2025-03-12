@@ -1,13 +1,17 @@
 #ifndef BME680_SENSOR_H
 #define BME680_SENSOR_H
 
+#define SEALEVELPRESSURE_HPA (1010.0)
+
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME680.h>
-#include <Arduino.h> // Notwendig für Serial.println
+#include <Arduino.h> // required Serial
 
-extern Adafruit_BME680 bme; // Deklaration von bme
+extern Adafruit_BME680 bme;
 void bme680_init();
-int[] get_Environment();
+void get_Environment(int values[]); 
+//oder
+//int* get_Environment(); 
 
 #endif

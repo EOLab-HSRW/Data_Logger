@@ -1,8 +1,6 @@
 #include "bme680_sensor.h"
 
-Adafruit_BME680 bme; // Definition von bme
-
-bme
+Adafruit_BME680 bme;
 
 void bme680_init() {
   Wire.begin();
@@ -17,7 +15,36 @@ void bme680_init() {
   bme.setGasHeater(320, 150);
 }
 
-// Get Values and Multiply with 100 to ensure the floating values
-int[] get_Environment(){
-  int[] values = {(int)bme.temperature*100,(int)bme.pressure*100,(int)bme.humidity*100,(int)bme.gas_resistance*100};
+void get_Environment(int values[]) { 
+  // Checking availability of the Sensor
+  if (!bme.performReading()) {
+    Serial.println("Failed to perform reading :(");
+    return; 
+  }
+
+  // If available, read the Values and typecast it to int and multiply with 100,
+  // to ensure the floating values
+  values[0] = (int)(bme.temperature * 100);
+  values[1] = (int)(bme.pressure * 100);
+  values[2] = (int)(bme.humidity * 100);
+  values[3] = (int)(bme.gas_resistance * 100);
 }
+//if dynamic use then : 
+/*
+int* get_Environment(){
+  if (!bme.performReading()) {
+    Serial.println("Failed to perform reading :(");
+    return nullptr;
+  }
+  int* values = (int*)malloc(4 * sizeof(int));
+  if (values == nullptr){
+    Serial.println("failed");
+    return nullptr;
+  }
+  values[0] = (int)(bme.temperature * 100);
+  values[1] = (int)(bme.pressure * 100);
+  values[2] = (int)(bme.humidity * 100);
+  values[3] = (int)(bme.gas_resistance * 100);
+  return values;
+}
+*/

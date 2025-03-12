@@ -2,6 +2,9 @@
 
 Adafruit_EEPROM_I2C i2ceeprom;
 
+unsigned long addr = 0;
+unsigned long eepromSize = MAXADD;
+
 void eeprom_init() {
 
   // Turning Power Supply On for EEPROM 
@@ -26,14 +29,20 @@ void eeprom_init() {
     }
 }
 
+// ------------------------------------------------------------------------------
+// In Progress
 unsigned long address;
 
-// Reading data
-void readData(){
-  i2ceeprom.read(g_random_addr);
+// Reading Data from EEPROM
+void readData(unsigned long address, byte *buffer, unsigned int size) {
+  i2ceeprom.read(address, buffer, size);
+  // Hex Conversion if needed when decode String(buffer[i], HEX)
 }
 
 // Writing Data
-void writeData(){
-  i2ceeprom.write(g_random_addr,g_write_data);
+void writeData(unsigned long address,unsigned long data){
+  i2ceeprom.write(address,data);
+  // Increase The Address Counter for the next Entry
+    addr += 32; 
 }
+// --------------------------------------------------------------------------------

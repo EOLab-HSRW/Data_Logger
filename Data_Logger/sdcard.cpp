@@ -19,13 +19,14 @@ void writeFile(const char *path, const char *message) {
   Serial.printf("Writing file: %s\n", path);
   File file = SD.open(path, FILE_APPEND);
   if (file) {
-    file.print(millis()); // Zeitstempel hinzufügen
-    file.print(", "); // Trennzeichen hinzufügen
+    
     if (file.print(message)) {
       Serial.println("File written.");
     } else {
       Serial.println("Write failed.");
     }
+    // Seperation for CSV
+    file.print(", "); 
     file.println();
     file.close();
   } else {
