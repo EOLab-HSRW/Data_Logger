@@ -76,12 +76,12 @@ Total : 224 Bits
 2) With Efficiency
 
 - 1x 32 Bit (Unix Timestamp)
-- 1x 16 Bit (Temprature -40°C - 100°C)
+- 1x 16 Bit (Temprature -40°C bis 85°C)
 - 1x 32 Bit (Pressure)
-- 1x 16 Bit (Humidity 0%-100%)
+- 1x 16 Bit (Humidity 0% bis 100%)
 - 1x 32 Bit (Gas)
-- 1x 32 Bit (Water Pressure / Liquid Level 0-5000)
-- 1x 16 Bit (Voltage Level 0-24)
+- 1x 32 Bit (Water Pressure / Liquid Level 0 mm bis 5000 mm)
+- 1x 16 Bit (Voltage Level 0V bis 24 V)
 
 Total : 144 Bits
 
