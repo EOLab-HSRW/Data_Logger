@@ -8,7 +8,7 @@ This Project aims to ease the Process of logging Data on an external Storage (SD
 
 ## RawWireless Wisblock
 
-| Component  | Price (€) | Description |
+| Component  | Price (€) | Description                                  |
 |------------|-----------|----------------------------------------------|
 | RAK11200   | 13.16     | ESP32 based including WiFi, BLE              |
 | RAK11310   | 17.01     | Raspberry Pi based including LoRa Transceiver |
@@ -16,7 +16,17 @@ This Project aims to ease the Process of logging Data on an external Storage (SD
 | RAK15000   | 15.96     | EEPROM Module                                |
 | RAK15002   | 04.90     | SD-Card Module                               |
 | RAK19011   | -         |                                              |
-| RAK19012  
+| RAK19012   | -         |                                              |
+| RAK5802    | 07.97     |                                              |
+| RAK1906    | 20.21     | Environment Sensor Module                    |
+| RS485      | -         | Liquid Level Sensor + Connector              |
+| **Total**  | **85.86** |                                              |
+
+## Documentation
+
+For Data Sheets, Quick Guides, and Description, visit:  
+[docs.RawWireless.com](https://docs.RawWireless.com)
+
 
 
 ## Used Software
