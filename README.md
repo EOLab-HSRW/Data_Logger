@@ -96,49 +96,40 @@ There exists a difference between the two options of an amount of 5201 Iteration
 
 ### EEPROM RAK15000 
 
-This module orginizes the Storage as 4x 64Kb Blocks .
-To choose between these Blocks the I2C Communication is used.
-The Storage is linear sequential but with a structered format of 8 Bits -> 1 Byte at each Address.
-The Address Schema is as follows:
-
-3 Bit Address (For I2C) : 
-
-        1) 000 -> Block 0 (0x00000 - 0x0FFFF)
-        2) 001 -> Block 1 (0x10000 - 0x1FFFF)
-        3) 010 -> Block 2 (0x20000 - 0x2FFFF)
-        4) 011 -> Block 3 (0x30000 - 0x3FFFF)
+This Module has a size of 2Mb (2 * 2^20) = 2.097.152 Bits.
+The Storage is linear sequential.
+The Addresses contain 1 Byte at each Address.
+In total 262.144 Addresses are available.
 
 ### EEPROM RAK11200 (internal)
 
 This Module has an internal EEPROM which has a size of 64Kb (524.288 Bits).
-So it doesn't need a Block Switch Control.
-It is also linear sequential but has no special format structure like the RAK15000.
+It is also linear sequential.
 It is possible that it has already configuration data on it at the purchase to ease the Connection Process for LoRaWan.
-
-The Addres Schema:
-        
-        1) 0x0000 - 0xFFFF 
-
+The Addresses are 16 Bit from 0x0000 to 0xFFFF.
 
 ### Data Storage Management
 
-For this Project we will use the first 5 Bytes to save two Counters to keep track of the Process Status.
+We will use the first 8 Bytes (64 Bits) as Meta Data to keep track of the Process Status.
 
-Included are these two Data: 
+Included are these Data as follows: 
 
         1) Writing Counter for Total Writing Amount (20 Bit) 
-        2) Storage Position Counter for keep tracking the next Writable Address (20 Bit)
+        2) Storage Position Counter for keep tracking the next Writable Address (18 Bit)
+
+        --------------
+        Total: 38 Bit
+        Rest:  26 Bit (Free for more Data if needed in the future) 
 
 
-The Writing Counter has to be stored globally once and seperatly because the possible cycle of writing is exactly 1 Million Times until it gets unreliable.
-Storing this amount requires at least 20 Bits for the Value 1 Million (0xF4240).
+The Writing Counter needs to be capeable of storing the maximum possible Writing Cycle (1 Million).
+Storing this amount requires at least 20 Bits. (1 Million = 0xF4240).
 So the Starting first 20 Bits are reserved for the Total Amount Counter.
 
+The Storage Position Counter needs to be at least 18 Bits, because the maximum Address is 262.144.
 
-Storage Position Counter needs to be also 16 Bits.
-Because of 65536 possible entrys, we can determine the needed amount of Bits to at least 16 Bit for the Writing Counter for each Block. 
-Thats the maximum amount of entrys we can get into our EEPROM if we divide the Meta Data in the several Blocks.
-
+So in total the least needed amount is 38 Bits.
+But it is a better Idea and a more efficient way to increase the size of the Meta Data from 4 to 8 Bytes to avoid Problems that maybe can occure in the future like if more counters for different purposes are needed.
 
 ### EEPROM Data Reader
 
