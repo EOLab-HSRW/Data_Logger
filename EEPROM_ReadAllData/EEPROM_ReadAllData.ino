@@ -76,7 +76,7 @@ void setup() {
       break;
     }
   }
-  // Initialising EEPROM and SD-Karte
+  // Initialising EEPROM and SD-Card
   eeprom_init();
 
   if (!SD.begin()) { 
