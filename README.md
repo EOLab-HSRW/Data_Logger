@@ -1,157 +1,132 @@
-# Data_Logger
+# Data Logger
 
 ## Description
 
-This Project aims to ease the Process of logging Data on an external Storage (SD-Card / EEPROM).
+This project simplifies data logging to external storage (SD card / EEPROM).
 
-# Used Hardware
+## Hardware
 
-## RawWireless Wisblock
+### RawWireless WisBlock
 
 | Component  | Price (€) | Description                                  |
 |------------|-----------|----------------------------------------------|
-| RAK11200   | 13.16     | ESP32 based including WiFi, BLE              |
-| RAK11310   | 17.01     | Raspberry Pi based including LoRa Transceiver |
-| RAK19002   | 06.65     | Power Slot Module (e.g., Li-Ion, USB-C, Solar) |
-| RAK15000   | 15.96     | EEPROM Module                                |
-| RAK15002   | 04.90     | SD-Card Module                               |
-| RAK19011   | -         |                                              |
-| RAK19012   | -         |                                              |
-| RAK5802    | 07.97     |                                              |
-| RAK1906    | 20.21     | Environment Sensor Module                    |
-| RS485      | -         | Liquid Level Sensor + Connector              |
+| RAK11200   | 13.16     | ESP32-based module with WiFi & BLE           |
+| RAK11310   | 17.01     | Raspberry Pi-based module with LoRa transceiver |
+| RAK19002   | 06.65     | Power slot module (Li-Ion, USB-C, Solar)     |
+| RAK15000   | 15.96     | EEPROM module                               |
+| RAK15002   | 04.90     | SD card module                              |
+| RAK19011   | -         | Reserved                                    |
+| RAK19012   | -         | Reserved                                    |
+| RAK5802    | 07.97     | Reserved                                    |
+| RAK1906    | 20.21     | Environmental sensor module                 |
+| RS485      | -         | Liquid level sensor + connector             |
 | **Total**  | **85.86** |                                              |
 
 ## Documentation
 
-For Data Sheets, Quick Guides, and Description, visit:  
+For datasheets, quick guides, and detailed descriptions, visit:  
 [docs.RawWireless.com](https://docs.RawWireless.com)
 
+## Software
 
-
-## Used Software
-
-The Arduino IDE is used.
-Files are included in the Projectfolder.
+- **IDE:** Arduino IDE  
+- **Project files:** Included in the project folder  
 
 ## Data Types
-    1) Timestamp
-    2) Environment Sensor:
-    * Temprature
-    * Pressure
-    * Humidity
-    * Gas
 
-    3) Liquid Level Sensor:
-    * Liquid Level
-    * Water Pressure
+### 1. Timestamp  
+### 2. Environmental Sensor:
+   - Temperature
+   - Pressure
+   - Humidity
+   - Gas
+### 3. Liquid Level Sensor:
+   - Liquid Level
+   - Water Pressure
 
+## EEPROM Data Storage Simulation
 
-## Datastoring Simulation for EEPROM
+### Properties
 
-### Property's:
-- 1 Million Writing Cycles (until it gets unreliable)
-- 2Mb (2^20 (2.097.152)) Bits orginized as 262.144 Words (in 8 Bit Format).
-- Standby Current (3 micro Ampere)
-- 256 Bytes Page Write Mode (in one step (for reducing rapid wear))
-- 3.3V Input (Can be controlled from the Core (On/Off))
+- **Endurance:** 1 million write cycles
+- **Size:** 2Mb (2,097,152 bits), organized as 262,144 words (8-bit format)
+- **Power:** Standby current ~3 µA  
+- **Write Mode:** 256-byte page writes (reduces wear)
+- **Voltage:** 3.3V (can be controlled via the core)
 
-### Restriction's: 
-- 2MB
-- at least 2-3 Month endurance
+### Restrictions
 
-### Calculation :
-Assuming that 7 Values has to be stored at each iteration, the folllowing result occurs:
+- **Capacity:** 2MB
+- **Estimated endurance:** 2-3 months
 
-2^20 * 2 = 2.097.152 Bits
+### Storage Calculation
 
-Two Options are available:
+#### Option 1 (Without Optimization)
 
-1) No Efficiency:
+- 1 × 32-bit Unix timestamp
+- 1 × 32-bit temperature
+- 1 × 32-bit pressure
+- 1 × 32-bit humidity
+- 1 × 32-bit gas level
+- 1 × 32-bit liquid level / water pressure
+- 1 × 32-bit voltage level  
+**Total:** 224 bits  
 
-- 1x 32 Bit (Unix Timestamp)
-- 1x 32 Bit (Temprature)
-- 1x 32 Bit (Pressure)
-- 1x 32 Bit (Humidity)
-- 1x 32 Bit (Gas)
-- 1x 32 Bit (Water Pressure / Liquid Level)
-- 1x 32 Bit (Voltage Level)
+**Iterations:**  
+`(2^20 * 2) / 224 = 9,362`
 
-Total : 224 Bits
+#### Option 2 (Optimized Storage)
 
-2^20 * 2 / 224 = 9362.28571429
+- 1 × 32-bit Unix timestamp
+- 1 × 16-bit temperature (-40°C to 85°C)
+- 1 × 32-bit pressure
+- 1 × 16-bit humidity (0% to 100%)
+- 1 × 32-bit gas level
+- 1 × 32-bit liquid level / water pressure (0 mm to 5000 mm)
+- 1 × 16-bit voltage level (0V to 24V)  
+**Total:** 144 bits  
 
+**Iterations:**  
+`(2^20 * 2) / 144 = 14,564`
 
-2) With Efficiency
+**Difference:** +5,201 iterations with optimization.
 
-- 1x 32 Bit (Unix Timestamp)
-- 1x 16 Bit (Temprature -40°C bis 85°C)
-- 1x 32 Bit (Pressure)
-- 1x 16 Bit (Humidity 0% bis 100%)
-- 1x 32 Bit (Gas)
-- 1x 32 Bit (Water Pressure / Liquid Level 0 mm bis 5000 mm)
-- 1x 16 Bit (Voltage Level 0V bis 24 V)
+### EEPROM RAK15000
 
-Total : 144 Bits
+- **Size:** 2Mb (2 × 2^20 = 2,097,152 bits)  
+- **Storage:** Linear, sequential  
+- **Address range:** 262,144 addresses (1 byte per address)
 
-2^20 * 2 / 144 = 14563.5555556
+### EEPROM RAK11200 (Internal)
 
+- **Size:** 64Kb (524,288 bits)  
+- **Storage:** Linear, sequential  
+- **Address range:** 16-bit (0x0000 to 0xFFFF)  
+- **Note:** May contain pre-configured LoRaWAN data.
 
-### Result
+## Data Storage Management
 
-There exists a difference between the two options of an amount of 5201 Iterations.
+First **8 bytes (64 bits)** are reserved as metadata:
 
-### EEPROM RAK15000 
+1. **Write Counter** (20-bit) → Tracks total write cycles  
+2. **Storage Position Counter** (18-bit) → Tracks next writable address  
 
-This Module has a size of 2Mb (2 * 2^20) = 2.097.152 Bits.
-The Storage is linear sequential.
-The Addresses contain 1 Byte at each Address.
-In total 262.144 Addresses are available.
+**Total:** 38 bits (26 bits reserved for future use)
 
-### EEPROM RAK11200 (internal)
+- Write Counter needs **20 bits** (1,000,000 cycles = 0xF4240)  
+- Storage Position Counter needs **18 bits** (max. 262,144 addresses)  
+- Allocating **8 bytes** ensures scalability for future enhancements.
 
-This Module has an internal EEPROM which has a size of 64Kb (524.288 Bits).
-It is also linear sequential.
-It is possible that it has already configuration data on it at the purchase to ease the Connection Process for LoRaWan.
-The Addresses are 16 Bit from 0x0000 to 0xFFFF.
+## EEPROM Data Reader
 
-### Data Storage Management
+- A separate sketch is available in the project folder.
 
-We will use the first 8 Bytes (64 Bits) as Meta Data to keep track of the Process Status.
+## EEPROM Decoder
 
-Included are these Data as follows: 
+- Required after sensor/context switching.
+- A separate sketch will be added soon.
 
-        1) Writing Counter for Total Writing Amount (20 Bit) 
-        2) Storage Position Counter for keep tracking the next Writable Address (18 Bit)
+## Data Erasure Before Switching Context/Sensors
 
-        --------------
-        Total: 38 Bit
-        Rest:  26 Bit (Free for more Data if needed in the future) 
-
-
-The Writing Counter needs to be capeable of storing the maximum possible Writing Cycle (1 Million).
-Storing this amount requires at least 20 Bits. (1 Million = 0xF4240).
-So the Starting first 20 Bits are reserved for the Total Amount Counter.
-
-The Storage Position Counter needs to be at least 18 Bits, because the maximum Address is 262.144.
-
-So in total the least needed amount is 38 Bits.
-But it is a better Idea and a more efficient way to increase the size of the Meta Data from 4 to 8 Bytes to avoid Problems that maybe can occure in the future like if more counters for different purposes are needed.
-
-### EEPROM Data Reader
-
-A Seperate Sketch can be found in the Projectfolder.
-
-
-### EEPROM Decoder
-
-After every Switch of Context or Sensor Change, the Data has to be decoded.
-A Seperate Sketch will be included in the Projectfolder soon.
-
-
-
-### Erasing Data before switching Context / Sensors
-
-After every Switch of Context or Sensor Change, the Data has to ereased to avoid Data conflicts.
-A Seperate Sketch will be included in the Projectfolder soon.
-
+- Prevents conflicts when changing sensors.
+- A separate sketch will be added soon.
