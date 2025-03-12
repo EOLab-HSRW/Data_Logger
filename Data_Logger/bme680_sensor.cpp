@@ -17,10 +17,7 @@ void bme680_init() {
   bme.setGasHeater(320, 150);
 }
 
-String bme680_get() {
-  String result = String(bme.temperature) +"," +
-                  String(bme.pressure) + " hPa\n" +
-                  String(bme.humidity) + " %\n" +
-                  String(bme.gas_resistance) + " KOhms\n";
-  return result;
+// Get Values and Multiply with 100 to ensure the floating values
+int[] get_Environment(){
+  int[] values = {(int)bme.temperature*100,(int)bme.pressure*100,(int)bme.humidity*100,(int)bme.gas_resistance*100};
 }

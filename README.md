@@ -140,6 +140,11 @@ Because of 65536 possible entrys, we can determine the needed amount of Bits to 
 Thats the maximum amount of entrys we can get into our EEPROM if we divide the Meta Data in the several Blocks.
 
 
+### EEPROM Data Reader
+
+A Seperate Sketch can be found in the Projectfolder.
+
+
 ### EEPROM Decoder
 
 After every Switch of Context or Sensor Change, the Data has to be decoded.

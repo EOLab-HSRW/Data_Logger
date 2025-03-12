@@ -8,7 +8,6 @@
 
 extern Adafruit_BME680 bme; // Deklaration von bme
 void bme680_init();
-String bme680_get();
-
+int[] get_Environment();
 
 #endif
