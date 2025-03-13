@@ -34,9 +34,6 @@ void writeFile(const char *path, const char *message) {
     } else {
       Serial.println("Write failed.");
     }
-    // Seperation for CSV
-    file.print(", "); 
-    file.println();
     file.close();
   } else {
     Serial.println("Failed to open file for writing.");

@@ -7,11 +7,7 @@
 // Global Variables 
 
 unsigned long timestamp;
-int eeprom_address = 0;
 const int measurement_interval = 300000; // 5 minutes
-
-// Global Buffer to read 32 Bits at once
-byte buffer[32];
 
 // ------------------------------------------------------------------
 // Only do changes here
@@ -27,7 +23,7 @@ byte buffer[32];
 // Generat an Array with the size of the amount of Sensor Values
 
 // Environment Data Storage
-int environmentValues[4];
+long environmentValues[4];
 
 
 // Function for Getting all the Data from all the Sensors
@@ -40,7 +36,7 @@ void get_Values(){
 
 }
 
-// -----------------------------------------------------------
+// ------------------------------------------------------------------
 
 void setup() {
 
@@ -76,34 +72,17 @@ void setup() {
 void loop() {
 
   // get current timestamp
-    timestamp = millis(); // replace with rtc if available
+  timestamp = millis(); // replace with rtc if available
 
-  // write it to the EEPROM and onto the SD-Card
+  // get current values of the sensor
 
-  // Use for that: get_Environment()
-  // Get also the Timestamp from RTC
-
-  // Get them into 32 Bit Format if necessary
-  
-  // Storing Data in the Buffer
-
-  // Split up the 32 Bit int into 4 pieces of 8 Bit to store them in 4 seperated addresses ( just for EEPROM)
-
-  // Functions that can be used
-  //readData(addr, buffer, 32);
-  //writeFile("/Test.txt", );
-  // void readData(unsigned long address, byte *buffer, unsigned int size);
-  // void writeData(unsigned long address,unsigned long data);
-  // void readFile(const char *path);
-  // void writeFile(const char *path, const char *message);
-  // void deleteFile(const char *path);
-  // int[] get_Environment();
+  get_Values();
 
 
   // Data
   unsigned char data = 0;
 
-  // --------------- Hier noch bearbeiten fehler 
+  // --------------- Stopped Here--------------------------------------------
   // writing values to EEPROM
     //writeData(eeprom_address, data);
     

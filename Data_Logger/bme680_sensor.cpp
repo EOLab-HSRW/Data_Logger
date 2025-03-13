@@ -15,36 +15,18 @@ void bme680_init() {
   bme.setGasHeater(320, 150);
 }
 
-void get_Environment(int values[]) { 
+void get_Environment(long values[]) { 
   // Checking availability of the Sensor
   if (!bme.performReading()) {
     Serial.println("Failed to perform reading :(");
     return; 
   }
 
-  // If available, read the Values and typecast it to int and multiply with 100,
-  // to ensure the floating values
-  values[0] = (int)(bme.temperature * 100);
-  values[1] = (int)(bme.pressure * 100);
-  values[2] = (int)(bme.humidity * 100);
-  values[3] = (int)(bme.gas_resistance * 100);
+  // If available, read the Values and typecast it to long and multiply with 100,
+  // for ensuring to keep the floating values
+  values[0] = (long)(bme.temperature * 100);
+  values[1] = (long)(bme.pressure * 100);
+  values[2] = (long)(bme.humidity * 100);
+  values[3] = (long)(bme.gas_resistance * 100);
 }
-//if dynamic use then : 
-/*
-int* get_Environment(){
-  if (!bme.performReading()) {
-    Serial.println("Failed to perform reading :(");
-    return nullptr;
-  }
-  int* values = (int*)malloc(4 * sizeof(int));
-  if (values == nullptr){
-    Serial.println("failed");
-    return nullptr;
-  }
-  values[0] = (int)(bme.temperature * 100);
-  values[1] = (int)(bme.pressure * 100);
-  values[2] = (int)(bme.humidity * 100);
-  values[3] = (int)(bme.gas_resistance * 100);
-  return values;
-}
-*/
+

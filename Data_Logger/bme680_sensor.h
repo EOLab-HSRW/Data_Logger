@@ -10,8 +10,6 @@
 
 extern Adafruit_BME680 bme;
 void bme680_init();
-void get_Environment(int values[]); 
-//oder
-//int* get_Environment(); 
+void get_Environment(long values[]); 
 
 #endif
