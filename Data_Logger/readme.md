@@ -146,6 +146,7 @@ char cc = c >> 8;
 char dd = d;
 
 printf("Long: %ld Byte1: %d Byte2: %d Byte3: %d Byte4: %d ", test, aa, bb, cc, dd);
+```
 
 ## **6. Future Enhancements**
 - **RTC Integration:** Implement timestamp retrieval for data logging.
