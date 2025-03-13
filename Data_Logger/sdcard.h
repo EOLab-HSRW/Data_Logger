@@ -3,8 +3,9 @@
 
 #include <SPI.h>
 #include <SD.h>
-#include <Arduino.h> // Notwendig für Serial.println
+#include <Arduino.h> // required for Serial
 
+void sdcard_init();
 void readFile(const char *path);
 void writeFile(const char *path, const char *message);
 void deleteFile(const char *path);

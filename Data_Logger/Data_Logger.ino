@@ -2,44 +2,48 @@
 #include "sdcard.h"
 #include "bme680_sensor.h"
 #include "eeprom.h"
-// include also the RTC File
+#include "rtc.h"
 
+// Global Variables 
 
-// Global Buffer  
+unsigned long timestamp;
+int eeprom_address = 0;
+const int measurement_interval = 300000; // 5 minutes
 
-// Generat an Array in size of the number of Sensor Values
-// int[4] + 1 timestamp
-
-int environmentValues[4];
+// Global Buffer to read 32 Bits at once
 byte buffer[32];
 
+// ------------------------------------------------------------------
+// Only do changes here
+
+// There are two needed changes to reuse this sketch for your purpose
+
+// 1) Calculate the total amount of values that needs to be collected
+//    do changes in the code below accordingly (resize the global Variables )
+
+// 2) Write a Getter Function for reading the new added Sensor Type
+//    and use it here
+
+// Generat an Array with the size of the amount of Sensor Values
+
+// Environment Data Storage
+int environmentValues[4];
 
 
 // Function for Getting all the Data from all the Sensors
 void get_Values(){
 
 // Get the Values of the Environment Sensor
-get_Environment(environmentValues);
-
-  Serial.print("Temperature: ");
-  Serial.println(environmentValues[0] / 100.0);
-
-  Serial.print("Pressure: ");
-  Serial.println(environmentValues[1] / 100.0);
-
-  Serial.print("Humidity: ");
-  Serial.println(environmentValues[2] / 100.0);
-
-  Serial.print("Gas Resisstance: ");
-  Serial.println(environmentValues[3] / 100.0);
+  get_Environment(environmentValues);
 
 // Append here other Sensors ....
 
-
 }
 
+// -----------------------------------------------------------
 
 void setup() {
+
   // Start by Initialising the Serial Communication
   time_t timeout = millis();
   Serial.begin(115200);
@@ -52,25 +56,18 @@ void setup() {
   }
 
 
-  // Initialising Modules (RTC, EEPROM, BME)
+  // Initialising Modules (SD,RTC, EEPROM, BME)
 
-  if (!SD.begin()) {
-    Serial.println("Card Mount Failed! Please make sure the card is inserted!");
-    return;
-  }
+  sdcard_init();
   eeprom_init();
   bme680_init();
 
 
-  // Configure the Instances
-
-  // Set the Date and time 
-
-  // Set EEPROM Counter ( First 20 Bits)
-
-  // Set the Environment Counter ( 18 Bits )
-
-  // Set the Rest Meta ( 26 Bits)
+  // Configuration : 
+  //                  - Set the Date and time (RTC)
+  //                  - Set EEPROM Counter ( First 20 Bits) -> Set Function() from eeprom
+  //                  - Set the Environment Counter ( 18 Bits )
+  //                  - Set the Rest Meta ( 26 Bits)
   
 
 
@@ -78,7 +75,9 @@ void setup() {
 
 void loop() {
 
-  // Read every 5.th Minute the Sensor data and 
+  // get current timestamp
+    timestamp = millis(); // replace with rtc if available
+
   // write it to the EEPROM and onto the SD-Card
 
   // Use for that: get_Environment()
@@ -99,6 +98,22 @@ void loop() {
   // void writeFile(const char *path, const char *message);
   // void deleteFile(const char *path);
   // int[] get_Environment();
+
+
+  // Data
+  unsigned char data = 0;
+
+  // --------------- Hier noch bearbeiten fehler 
+  // writing values to EEPROM
+    //writeData(eeprom_address, data);
+    
+    // writing the values to the sdcard
+    //char* log_entry = String(environmentValues[0]) + "," + String(environmentValues[1]) + "," + String(environmentValues[2]) + "," + String(environmentValues[3])+","+ String(timestamp)+",";
+    // writeFile("datalog.csv", log_entry);
+
+
+    // delay until next measurement time
+    delay(measurement_interval);
 
   }
 
