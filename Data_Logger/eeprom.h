@@ -15,7 +15,7 @@ void writeData(long address, unsigned char data);
 long getCounter();
 void setCounter(long counter);
 long getAddress();
-void setAddress(int address);
+void setAddress(long address);
 long calculateNewAddress(int increase);
 
 #endif

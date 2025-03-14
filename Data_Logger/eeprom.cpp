@@ -140,9 +140,55 @@ long getAddress(){
 }
 
 // Replacing the current Address with the new Value
-void setAddress(int address){
+void setAddress(long address){
 
-// Split the int into 4 Bytes and write from 21 to 38
+
+// Step 1 : Shift the long value 2 Bits to left to match the original position of the Address Mask
+
+address = address << 2; 
+
+// Step 2 : Split the long Value in 4 Bytes and get rid of the 1 Byte (because of Limit : 18 Bits for 262.144)
+
+// splitting into Bytes by shifting and doing bitwise "and" with predefined 32 Bitmasks accordingly
+// long mask1 = 4278190080; // 1111 1111 0000 0000 0000 0000 0000 0000 don t need because we know that it will be maximum 20 Bits ca. 1 Million
+long mask2 = 16711680;  // 0000 0000 1111 1111 0000 0000 0000 0000
+long mask3 = 65280;     // 0000 0000 0000 0000 1111 1111 0000 0000
+long mask4 = 255;       // 0000 0000 0000 0000 0000 0000 1111 1111
+
+// long firstByte = counter & mask1;
+long secondByte = address & mask2;
+long thirdByte = address & mask3;
+long lastByte = address & mask4;
+
+// char byte1 = firstByte >> 24;
+char byte2 = secondByte >> 16;
+char byte3 = thirdByte >> 8;
+char byte4 = lastByte;
+
+// Step 3 : Save the Value of the Addess Counter in the Byte (3) and Byte (5)  
+
+char save1 = i2ceeprom.read(2);
+char save2 = i2ceeprom.read(4);
+save1 = save1 >> 4;
+save1 = save1 << 4;
+save2 = save2 << 6;
+save2 = save2 >> 6;
+
+// Step 4 : Set the 2 nd Byte to the Address Mask
+i2ceeprom.write(3,byte3);
+
+// Step 5 : Take the Byte 3 and 5 and make an OR operation with the saved values
+
+byte2 = byte2 | save1; 
+byte4 = byte4 | save2;
+
+// Step 6 : Set the Bytes 3 and 5  
+
+
+i2ceeprom.write(2,byte2);
+i2ceeprom.write(4,byte4);
+
+// ------------------------------------------ has to be tested -----------
 
 }
 
