@@ -69,6 +69,12 @@ long getCounter(){
 // Replacing the current Counter with the new Value
 void setCounter(long counter){
 
+// Step 1 : Shift the long value 4 Bits to left to match the original position of Counter Mask
+
+counter = counter << 4; 
+
+// Step 2 : Split the long Value in 4 Bytes and get rid of the 1 Byte (because of Limit : 1 Mio)
+
 // splitting into Bytes by shifting and doing bitwise "and" with predefined 32 Bitmasks accordingly
 // long mask1 = 4278190080; // 1111 1111 0000 0000 0000 0000 0000 0000 don t need because we know that it will be maximum 20 Bits ca. 1 Million
 long mask2 = 16711680;  // 0000 0000 1111 1111 0000 0000 0000 0000
@@ -85,27 +91,27 @@ char byte2 = secondByte >> 16;
 char byte3 = thirdByte >> 8;
 char byte4 = lastByte;
 
-// ---------------------- Stopped Here-----------------
+// Step 3 : Save the Value of the Addess Counter in the last Byte (3) by shifting it 4 Bits to left and 4 Bits to right 
 
-// 0100 1100 | 0001 0010 | 1010 0001 | 0001 0010 // no need for First one limit 1 Mio 2 ^20  
-//      | 0001 0010 | 1010 0001 | 0001 0010      // 24 Bits need to be reduced to 20 
-//       0010 | 1010 0001 | 0001 0010      // Shift left 4 and right 
-//       0010 | 1010 0001 | 0001 0010      //  need to be fitted in the part from 21 - 38 . Bit 
-// 
+char save = i2ceeprom.read(2);
+save = save << 4;
+save = save >> 4;
 
-// Shift 4 Bits left for getting rid of the unnecessary part
-byte2 = byte2 << 4;
-// Shift 4 Bits right reposition
-byte2 = byte2 >> 4;
+// Step 4 : Set the 1 st and 2 nd Byte to the Counter Mask
 
+i2ceeprom.write(0,byte2);
+i2ceeprom.write(1,byte3);
 
-// before we can set the third Byte we have to save the four last bits from the eeprom
+// Step 5 : Take the Last Byte and make an OR operation with the saved value
 
-// i2ceeprom.write(0,byte1);
+byte4 = byte4 || save ;
 
+// Step 6 : Set the last Byte  
 
-// now combine the last four Bits with the 
-// i2ceeprom.write(2,data);
+i2ceeprom.write(2,byte4);
+
+// ------------------------------------------ has to be tested -----------
+
 }
 
 
