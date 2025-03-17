@@ -61,7 +61,9 @@ void setup() {
 
   // Configuration : 
   //                  - Set the Date and time (RTC)
-  //                  - Set EEPROM Counter ( First 20 Bits) -> Set Function() from eeprom
+
+  //                  - Set EEPROM Counter ( First 20 Bits) -> Set Fudnction() from eeprom
+  //                  - Start Address at 65 because 64 Bit s of Meta Data
   //                  - Set the Environment Counter ( 18 Bits )
   //                  - Set the Rest Meta ( 26 Bits)
   
@@ -77,17 +79,17 @@ void loop() {
   // get current values of the sensor
   get_Values();
 
-  // // combine timestamp and current values
+  // combine timestamp and current values
 
-  //   long data[5];
-  //   memcpy(data, environmentValues, 4 * sizeof(long));
-  //   memcpy(data +  4 , &timestamp, sizeof(long));
+    long data[5];
+    memcpy(data, environmentValues, 4 * sizeof(long));
+    memcpy(data +  4 , &timestamp, sizeof(long));
 
-  // // get the length of the sensor value array
-  // size_t size =  (sizeof(data) / sizeof(data[0])) ;
+  // get the length of the sensor value array
+  size_t size =  (sizeof(data) / sizeof(data[0])) ;
 
-  // // write the data to the EEPROM   
-  //  writeData(data, size);
+  // write the data to the EEPROM   
+   writeData(data, size);
 
 
   // combine the values to a String for writing it to the sd card

@@ -1,0 +1,11 @@
+00 0e c1 06 c7 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+ff 0e 0a 00 00 a0 9a 9c 00 67 09 00 00 d4 bd 0e 00 bb 08 00 00 e5 09 00 00 68 9b 9c 00 cc 08 00 
+00 f4 e5 0c 
+
+
+0000 0000 0000 1110 1100 0001 0000 0110 1100 0111 
+
+0000 0000 0000 1110 1100 = 236 anzahl der schreib vorgänge long wert in 4 bytes also 4 mal und bei jedem vorgang 5 werte also 236/ 20 = 11 Werte etwa
+
+0001 0000 0110 1100 01 =  16817 
