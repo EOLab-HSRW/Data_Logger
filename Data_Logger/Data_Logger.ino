@@ -7,7 +7,7 @@
 // Global Variables 
 
 unsigned long timestamp;
-const int measurement_interval = 300000; // 5 minutes
+const int measurement_interval = 5000; // 5 minutes / Test 10 Sec
 
 // ------------------------------------------------------------------
 // Only do changes here
@@ -75,24 +75,29 @@ void loop() {
   timestamp = millis(); // replace with rtc if available
 
   // get current values of the sensor
-
   get_Values();
 
+  // // combine timestamp and current values
 
-  // Data
-  unsigned char data = 0;
+  //   long data[5];
+  //   memcpy(data, environmentValues, 4 * sizeof(long));
+  //   memcpy(data +  4 , &timestamp, sizeof(long));
 
-  // --------------- Stopped Here--------------------------------------------
-  // writing values to EEPROM
-    //writeData(eeprom_address, data);
-    
-    // writing the values to the sdcard
-    //char* log_entry = String(environmentValues[0]) + "," + String(environmentValues[1]) + "," + String(environmentValues[2]) + "," + String(environmentValues[3])+","+ String(timestamp)+",";
-    // writeFile("datalog.csv", log_entry);
+  // // get the length of the sensor value array
+  // size_t size =  (sizeof(data) / sizeof(data[0])) ;
+
+  // // write the data to the EEPROM   
+  //  writeData(data, size);
 
 
-    // delay until next measurement time
-    delay(measurement_interval);
+  // combine the values to a String for writing it to the sd card
+  String log_entry = String(environmentValues[0]) + "," + String(environmentValues[1]) + "," + String(environmentValues[2]) + "," + String(environmentValues[3]) + "," + String(timestamp) + ",";
+  
+  // Write the log into the sd card
+  writeFile("/data.csv", log_entry.c_str());
+
+  // delay until next measurement time
+  delay(measurement_interval);
 
   }
 

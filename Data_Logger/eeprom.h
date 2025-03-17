@@ -11,11 +11,10 @@
 extern Adafruit_EEPROM_I2C i2ceeprom;
 void eeprom_init();
 void readData(long address);
-void writeData(long address, unsigned char data);
+void writeData(long* data, size_t size);
 long getCounter();
 void setCounter(long counter);
 long getAddress();
 void setAddress(long address);
-long calculateNewAddress(int increase);
 
 #endif
