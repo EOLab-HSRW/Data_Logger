@@ -3,50 +3,50 @@
 #include <SPI.h>
 #include <SD.h>
 
-#define EEPROM_ADDR 0x50  // Die I2C-Adresse des EEPROMs
-#define MAXADD 262143     // Maximale Adresse im EEPROM (für 256 KB)
+#define EEPROM_ADDR 0x50  // the I2C Address
+#define MAXADD 262143     // Maximum Addresses 
 
-// Instanz für das I2C-EEPROM
+// Instantiate I2C
 Adafruit_EEPROM_I2C i2ceeprom;
 
-// Initialisierungsfunktion für das EEPROM
+// Instantiate Function
 void eeprom_init() {
-  // Einschalten der Stromversorgung für das EEPROM
+  // Power on
   pinMode(WB_IO2, OUTPUT);
   digitalWrite(WB_IO2, HIGH);
-  delay(300); // Warten für 0.3 Sekunden
-  Serial.println("Stromversorgung eingeschaltet...");
+  delay(300); // wait for 0.3 Sec
+  Serial.println("Power on !");
 
-  // Verbindung zum EEPROM überprüfen
+  // checck the connection to eeprom
   if (i2ceeprom.begin(EEPROM_ADDR)) {  
-    Serial.println("I2C EEPROM gefunden");
+    Serial.println("I2C EEPROM was found !");
   } else {      
     while (1) {
-      Serial.println("I2C EEPROM nicht identifiziert ... Überprüfen Sie Ihre Verbindungen?");
+      Serial.println("I2C EEPROM not identified ... maybe check the connections?");
       delay(10);
     }     
   }
 }
 
-// Funktion zum Lesen von Daten aus dem EEPROM
+// function for reading from eeprom
 void readData(unsigned long address, byte *buffer, unsigned int size) {
   i2ceeprom.read(address, buffer, size);
 }
 
-// Funktion zum Schreiben auf die SD-Karte
+// function for writing on the sd card
 void writeFile(const char *path, const char *message) {
   Serial.printf("Schreibe Datei: %s\n", path);
   File file = SD.open(path, FILE_APPEND);
   if (file) {
     if (file.print(message)) {
-      Serial.println("Datei geschrieben.");
+      Serial.println("file written !");
     } else {
-      Serial.println("Schreiben fehlgeschlagen.");
+      Serial.println("writing failed !");
     }
     file.println();
     file.close();
   } else {
-    Serial.println("Öffnen der Datei zum Schreiben fehlgeschlagen.");
+    Serial.println("opening file failed !");
   }
 }
 
@@ -54,23 +54,19 @@ void setup() {
   Serial.begin(115200);
   while (!Serial && millis() < 5000) { delay(100); }
 
-  // EEPROM und SD-Karte initialisieren
+  // Instantiate
   eeprom_init();
 
   if (!SD.begin()) { 
-    Serial.println("Initialisierung der SD-Karte fehlgeschlagen!");
+    Serial.println("failed!");
     return;
   }
-  Serial.println("SD-Karte initialisiert.");
+  Serial.println("success ! ");
 
-  // Konfiguration des EEPROMs zur Einstellung der Startadresse
-  // i2ceeprom.write(2, 1);
-  // i2ceeprom.write(3, 4);
-
-  // Daten aus dem EEPROM lesen und auf die SD-Karte schreiben
-  byte buffer[32];
+  // data to write on the sd card
+  byte buffer[32]; // buffer for writing at once
   unsigned long addr = 0;
-  const unsigned long eepromSize = 100; // Nur 100 Bytes lesen
+  const unsigned long eepromSize = 256; // only read 100 Bytes
   unsigned long bytesRead = 0;
 
   while (bytesRead < eepromSize) {
@@ -88,7 +84,7 @@ void setup() {
     bytesRead += chunkSize;
   }
 
-  Serial.println("Erfolgreich auf die SD-Karte geschrieben.");
+  Serial.println("Writing Successfull !");
 }
 
 void loop() {

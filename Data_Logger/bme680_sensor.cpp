@@ -28,5 +28,11 @@ void get_Environment(long values[]) {
   values[1] = (long)(bme.pressure * 100);
   values[2] = (long)(bme.humidity * 100);
   values[3] = (long)(bme.gas_resistance * 100);
+
+  // Testing
+  Serial.print("Temperature: "); Serial.println(values[0]);
+  Serial.print("Pressure: "); Serial.println(values[1]);
+  Serial.print("Humidity: "); Serial.println(values[2]);
+  Serial.print("Gas Resistance: "); Serial.println(values[3]);
 }
 

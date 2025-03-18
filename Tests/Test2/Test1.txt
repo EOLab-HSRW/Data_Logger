@@ -1,0 +1,19 @@
+ff ff ff ff 24 ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+ff ff ff ff 
+0 6 30 0 b4 93 9 
+
+0 48 | b1 9c | 0 56 | 8 0 | 0 88  -> 72 , 454,68 , 86 , 2048 , 136
+74 d | 0 5a | 4c 0 | 0 7f | 9 0   -> 29709 , 90 , 194,56 , 127 , 2304
+0 48 | b1 9c| 0 f7 | 7 0 | 0 f8   -> 72 , 454,68 , 127 , 1792 , 248
+34 f | 0 7c | 62 0 | 0 ff | 
+
+
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff 
+ff ff ff ff 
+
+0000 0000 | 0000 0110 | 0011 0000 | 0000 0000 | 1011 0100 | 1001 0011 | 0000 1001 | 0000 0000 | 0000 0000
+---------------------------- 64 + 32 + 2 + 1 = 99 Counter 
+			     -------------------------- 32 + 8 + 4 + 1 = 45 - 8 = 40 Werte / 4 = 10 Werte  

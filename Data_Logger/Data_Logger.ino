@@ -75,18 +75,31 @@ void loop() {
 
   // get current timestamp
   timestamp = millis(); // replace with rtc if available
+  Serial.print("Timestamp: "); Serial.println(timestamp);
 
   // get current values of the sensor
   get_Values();
+
+  Serial.println("Sensor Values:");
+  Serial.print("Temperature: "); Serial.println(environmentValues[0]);
+  Serial.print("Pressure: "); Serial.println(environmentValues[1]);
+  Serial.print("Humidity: "); Serial.println(environmentValues[2]);
+  Serial.print("Gas Resistance: "); Serial.println(environmentValues[3]);
 
   // combine timestamp and current values
 
     long data[5];
     memcpy(data, environmentValues, 4 * sizeof(long));
     memcpy(data +  4 , &timestamp, sizeof(long));
+    Serial.println("Data to be written to EEPROM:");
+    for (int i = 0; i < 5; i++) {
+  Serial.print("Data["); Serial.print(i); Serial.print("]: ");
+  Serial.println(data[i]);
+}
 
   // get the length of the sensor value array
   size_t size =  (sizeof(data) / sizeof(data[0])) ;
+  Serial.print("Data size: "); Serial.println(size);
 
   // write the data to the EEPROM   
    writeData(data, size);
