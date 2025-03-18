@@ -6,37 +6,29 @@
 
 // Global Variables 
 
-unsigned long timestamp;
-const int measurement_interval = 5000; // 5 minutes / Test 10 Sec
+unsigned long timestamp;               // Declaration for using it in the loop
+const int measurement_interval = 500000; // 5 minutes
 
-// ------------------------------------------------------------------
-// Only do changes here
 
 // There are two needed changes to reuse this sketch for your purpose
-
 // 1) Calculate the total amount of values that needs to be collected
-//    do changes in the code below accordingly (resize the global Variables )
-
+//    do changes in the code below accordingly (resize the global Variables)
 // 2) Write a Getter Function for reading the new added Sensor Type
 //    and use it here
-
 // Generat an Array with the size of the amount of Sensor Values
 
 // Environment Data Storage
 long environmentValues[4];
 
-
 // Function for Getting all the Data from all the Sensors
 void get_Values(){
 
-// Get the Values of the Environment Sensor
+  // Get the Values of the Environment Sensor
   get_Environment(environmentValues);
 
-// Append here other Sensors ....
+  // Append here other Sensors ....
 
 }
-
-// ------------------------------------------------------------------
 
 void setup() {
 
@@ -59,13 +51,7 @@ void setup() {
   bme680_init();
 
 
-  // Configuration : 
-  //                  - Set the Date and time (RTC)
-
-  //                  - Set EEPROM Counter ( First 20 Bits) -> Set Fudnction() from eeprom
-  //                  - Start Address at 65 because 64 Bit s of Meta Data
-  //                  - Set the Environment Counter ( 18 Bits )
-  //                  - Set the Rest Meta ( 26 Bits)
+  // Set the Date and time (RTC)
   
 
 
@@ -95,7 +81,7 @@ void loop() {
     for (int i = 0; i < 5; i++) {
   Serial.print("Data["); Serial.print(i); Serial.print("]: ");
   Serial.println(data[i]);
-}
+  }
 
   // get the length of the sensor value array
   size_t size =  (sizeof(data) / sizeof(data[0])) ;
@@ -104,7 +90,7 @@ void loop() {
   // write the data to the EEPROM   
    writeData(data, size);
 
-
+  // --------------------------------------------------------------------------- Refactor needed
   // combine the values to a String for writing it to the sd card
   String log_entry = String(environmentValues[0]) + "," + String(environmentValues[1]) + "," + String(environmentValues[2]) + "," + String(environmentValues[3]) + "," + String(timestamp) + ",";
   
