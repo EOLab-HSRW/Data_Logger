@@ -46,9 +46,9 @@ void setup() {
   Serial.println("Overwritten First 200 Bytes completed.");
 
   // Step 2 : Setting the default Value for the Address Counter 
-  // (36 = 0010 0100 = 1001 = 9 .th Byte next free Address)
+  // (32 = 0010 0000 = 1000 = 8 .th Byte next free Address  0-7 Meta)
 
-  i2ceeprom.write(4, 0x24); 
+  i2ceeprom.write(4, 0x20);    
   
   Serial.println("Metadata was set.");
 }
