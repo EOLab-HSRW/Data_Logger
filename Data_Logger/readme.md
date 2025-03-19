@@ -2,12 +2,12 @@
 
 ## Content
 
-- [Overview](#1.overview)
-- [File Structure](#2.file-structure)
-- [System Workflow](#3.system-workflow)
-- [Function Summary](#4.functions-summary)
-- [Data Isolation / Storage](#5.isolation-of-counter-and-storage-data)
-- [Future Enhancements](#6.future-enhancements)
+- [Overview](#1-overview)
+- [File Structure](#2-file-structure)
+- [System Workflow](#3-system-workflow)
+- [Function Summary](#4-functions-summary)
+- [Data Isolation / Storage](#5-isolation-of-counter-and-storage-data)
+- [Future Enhancements](#6-future-enhancements)
 
 ## **1. Overview**
 This project implements a data logging system using an Arduino-compatible microcontroller. The system reads environmental sensor data, stores it in EEPROM, and writes it to an SD card. Additionally, it integrates a Real-Time Clock (RTC) for timestamping logged values.
