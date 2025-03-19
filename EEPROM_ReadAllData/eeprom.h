@@ -3,6 +3,6 @@
 
 
 void eeprom_init();
-void readData(unsigned long address, byte *buffer, unsigned int size);
+char readData(unsigned long address);
 
 #endif

@@ -28,6 +28,6 @@ void eeprom_init() {
 }
 
 // function for reading from eeprom
-void readData(unsigned long address, byte *buffer, unsigned int size) {
-  i2ceeprom.read(address, buffer, size);
+char readData(unsigned long address) {
+  i2ceeprom.read(address);
 }
