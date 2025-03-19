@@ -4,6 +4,16 @@
 
 This project simplifies data logging to external storage (SD card / EEPROM).
 
+
+## Content
+
+- [Overview](#hardware)
+- [File Structure](#2-file-structure)
+- [System Workflow](#3-system-workflow)
+- [Function Summary](#4-functions-summary)
+- [Data Isolation / Storage](#5-isolation-of-counter-and-storage-data)
+- [Future Enhancements](#6-future-enhancements)
+
 ## Hardware
 
 ### RawWireless WisBlock
