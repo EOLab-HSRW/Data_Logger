@@ -1,12 +1,26 @@
+#include "WString.h"
 #include "sdcard.h"
 
 
 
 void sdcard_init() {
- if (!SD.begin()) {
+  if (!SD.begin()) {
     Serial.println("Card Mount Failed! Please make sure the card is inserted!");
     return;
   }
+}
+
+String combineToString(long *data, size_t size) {
+
+  String log_entry = "";
+
+  for(unsigned long long i = 0; i< size; i++){
+
+    log_entry = log_entry + String(data[i]) + "," ;
+  }
+
+  return log_entry;
+
 }
 
 void readFile(const char *path) {
@@ -28,7 +42,7 @@ void writeFile(const char *path, const char *message) {
   Serial.printf("Writing file: %s\n", path);
   File file = SD.open(path, FILE_APPEND);
   if (file) {
-    
+
     if (file.print(message)) {
       Serial.println("File written.");
     } else {

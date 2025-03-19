@@ -289,15 +289,15 @@ void writeData(long* data, size_t size){
     unsigned char *byte_ptr = (unsigned char *) &data[i];
 
     // Write the Bytes & increase the address by k to not overwriting the same address all time
-    for(int k = 0; k < 4 ; k++){
+    // Important Arduino uses Big Endian , conversion to Little Endian Format
+    for(int k = 3; k >= 0 ; k--){
       Serial.print("Writing Byte "); Serial.print(k);
       Serial.print(" at EEPROM Address: "); Serial.print(address);
       Serial.print(" | Value: 0x"); Serial.println(byte_ptr[k], HEX);
-      i2ceeprom.write(address + k, byte_ptr[k]);
+      i2ceeprom.write(address, byte_ptr[k]);
+      address ++;
 
     }
-
-    address = address + 4;
     counter = counter + 4;
 
   }

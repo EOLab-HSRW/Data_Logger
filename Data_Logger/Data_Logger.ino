@@ -4,21 +4,21 @@
 #include "eeprom.h"
 #include "rtc.h"
 
-// Global Variables 
-
-unsigned long timestamp;               // Declaration for using it in the loop
-const int measurement_interval = 500000; // 5 minutes
-
+// Edit Here
+#define amountOfValues 4
 
 // There are two needed changes to reuse this sketch for your purpose
 // 1) Calculate the total amount of values that needs to be collected
-//    do changes in the code below accordingly (resize the global Variables)
+//    change the variable mountOfValues accordingly
 // 2) Write a Getter Function for reading the new added Sensor Type
-//    and use it here
-// Generat an Array with the size of the amount of Sensor Values
+//    and use it here (Important the Return Value has to be long)
 
 // Environment Data Storage
-long environmentValues[4];
+long environmentValues[amountOfValues];
+unsigned long timestamp;               // Declaration for using it in the loop
+const int measurement_interval = 10000; // 5 minutes
+
+
 
 // Function for Getting all the Data from all the Sensors
 void get_Values(){
@@ -27,7 +27,6 @@ void get_Values(){
   get_Environment(environmentValues);
 
   // Append here other Sensors ....
-
 }
 
 void setup() {
@@ -74,9 +73,9 @@ void loop() {
 
   // combine timestamp and current values
 
-    long data[5];
-    memcpy(data, environmentValues, 4 * sizeof(long));
-    memcpy(data +  4 , &timestamp, sizeof(long));
+    long data[amountOfValues+1];
+    memcpy(data, environmentValues, amountOfValues * sizeof(long));
+    memcpy(data +  amountOfValues , &timestamp, sizeof(long));
     Serial.println("Data to be written to EEPROM:");
     for (int i = 0; i < 5; i++) {
   Serial.print("Data["); Serial.print(i); Serial.print("]: ");
@@ -88,11 +87,9 @@ void loop() {
   Serial.print("Data size: "); Serial.println(size);
 
   // write the data to the EEPROM   
-   writeData(data, size);
+  writeData(data, size);
 
-  // --------------------------------------------------------------------------- Refactor needed
-  // combine the values to a String for writing it to the sd card
-  String log_entry = String(environmentValues[0]) + "," + String(environmentValues[1]) + "," + String(environmentValues[2]) + "," + String(environmentValues[3]) + "," + String(timestamp) + ",";
+  String log_entry = combineToString(data,size);
   
   // Write the log into the sd card
   writeFile("/data.csv", log_entry.c_str());
