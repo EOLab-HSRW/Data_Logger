@@ -1,4 +1,4 @@
-# EEPROM and SD Card Writer for Arduino
+# EEPROM Reader
 
 This project demonstrates how to read data from an I2C EEPROM and write it to an SD card. It includes functions for initializing both the EEPROM and the SD card, reading from the EEPROM, and writing the data to a file on the SD card.
 
