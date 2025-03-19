@@ -90,72 +90,49 @@ The project consists of several modules:
 
 ---
 
-### **Total Counter Calculation**
+### **Total Counter Isolation**
 | Step | Description |
 |------|------------|
-| **1** | Take **Byte 1-3** |
-| **2** | Convert and concatenate: `0000 0000 + 0000 0000 + 0000 0000` |
-| **3** | Typecast to long: `0000 0000 0000 0000 0000 0000 = 0` |
-| **4** | Increment by 1: `0000 0000 0000 0000 0000 0000 + 1 = 1` |
-| **5** | Convert to string: `0000 0000 0000 0000 0000 0001` |
-| **6** | Write to the first **20 Bits** |
+| **1** | Read **Byte 1-3** (Indexes 0-2) |
+| **2** | Perform a Bit Shift by 4 to the right on the third byte |
+| **3** | Perform a Bit Shift by 4 to the left to restore the original value |
+| **4** | Convert to `long` to obtain the exact value from the bytes |
+| **5** | Shift the first byte 16 bits to the left |
+| **6** | Shift the second byte 8 bits to the left |
+| **7** | Sum all values to get the final total |
 
----
-
-### **Address Counter Calculation**
+### **Total Counter Reset**
 | Step | Description |
 |------|------------|
-| **1** | Take **Byte 3-5** |
-| **2** | Convert and concatenate: `0000 0000 + 0000 0000 + 0000 0000` |
-| **3** | Typecast to long: `0000 0000 0000 0000 0000 0000 = 0` |
-| **4** | Increment by **sensor value amount (28)**: `0000 0000 0000 0000 0000 0000 + 28 = 28` *(7 Values × 4 (8 Bit to 32 Bit format))* |
-| **5** | Convert to string: `0000 0000 0000 0000 0001 1100` |
-| **6** | Write to **Bit 21 to 38** |
+| **1** | Generate 3 masks to extract the 20 bits from the long parameter |
+| **2** | Masks: `0xff0000`, `0x00ff00`, and `0x0000ff` |
+| **3** | Set byte 1 and byte 2 with the extracted values |
+| **4** | Read byte 3 again, perform a bit shift by 4 to the left and right to align with subsequent metadata |
+| **5** | Perform an OR operation with the adjusted `val3` and set the third byte |
 
 ---
 
-### ** Example of Byte Concatenation to Long**
+### **Address Counter Isolation**
+| Step | Description |
+|------|------------|
+| **1** | Read **Byte 3-5** (Indexes 2-4) |
+| **2** | Perform a Bit Shift by 4 to the right on the second byte |
+| **3** | Perform a Bit Shift by 4 to the left to restore the original value |
+| **4** | Convert to `long` to obtain the exact value from the bytes |
+| **5** | Shift the first byte 16 bits to the left |
+| **6** | Shift the third byte 8 bits to the left |
+| **7** | Sum all values to get the final address |
 
-```c
-// Concatenate 4 Bytes to a Long
-char a = 1;
-char b = 1;
-char c = 1;
-char d = 1;
-
-long aa = (long) a;
-long bb = (long) b << 8;
-long cc = (long) c << 16;
-long dd = (long) d << 24;
-
-printf("Byte 4: %d Byte 3 : %d Byte 2: %d Byte 1: %d ", dd, cc, bb, aa);
-```
+### **Address Counter Reset**
+| Step | Description |
+|------|------------|
+| **1** | Generate 3 masks to extract the 20 bits from the long parameter |
+| **2** | Masks: `0xff0000`, `0x00ff00`, and `0x0000ff` |
+| **3** | Set byte 2 with the extracted value |
+| **4** | Read byte 1 and byte 3 again, perform a bit shift by 6 to the left and right for byte 3, and by 4 to the left and right for byte 1 to align with subsequent metadata |
+| **5** | Perform an OR operation with `val1` and `val3` from behind and set the first and third bytes |
 
 ---
-
-### **Example of Splitting a Long into 4 Bytes**
-
-```c
-// Split a long into 4 Bytes
-long test = 5000000;
-
-long mask1 = 4278190080; // 1111 1111 0000 0000 0000 0000 0000 0000
-long mask2 = 16711680;  // 0000 0000 1111 1111 0000 0000 0000 0000
-long mask3 = 65280;     // 0000 0000 0000 0000 1111 1111 0000 0000
-long mask4 = 255;       // 0000 0000 0000 0000 0000 0000 1111 1111
-
-long a = test & mask1;
-long b = test & mask2;
-long c = test & mask3;
-long d = test & mask4;
-
-char aa = a >> 24;
-char bb = b >> 16;
-char cc = c >> 8;
-char dd = d;
-
-printf("Long: %ld Byte1: %d Byte2: %d Byte3: %d Byte4: %d ", test, aa, bb, cc, dd);
-```
 
 ## **6. Future Enhancements**
 - **RTC Integration:** Implement timestamp retrieval for data logging.
