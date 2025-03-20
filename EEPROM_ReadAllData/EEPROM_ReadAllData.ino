@@ -3,6 +3,7 @@
 #include "sdcard.h"
 #include "eeprom.h"
 #include "calculator.h"
+#include "rtc.h"
 
 
 void setup() {

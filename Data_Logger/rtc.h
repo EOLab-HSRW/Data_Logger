@@ -1,1 +1,7 @@
-// header for rtc comes here : has to be done 
+#ifndef RTC_H
+#define RTC_H
+
+
+String formatToUTC();
+
+#endif
