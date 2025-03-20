@@ -1,9 +1,12 @@
-// Serial.printf("%d:%d:%d %d/%d/%d \n",rtc.getHour(),rtc.getMinute(),rtc.getSecond(),rtc.getYear(),rtc.getMonth(),rtc.getDate());
 #include "Melopero_RV3028.h" //http://librarymanager/All#Melopero_RV3028
+#include <Wire.h>
 #include <Arduino.h>
 #include <stdint.h> 
-#include "eeprom.h"
+#include "rtc.h"
+
+
 Melopero_RV3028 rtc;
+
 void rtc_init() {
   Wire.begin();
   rtc.initI2C();
@@ -20,6 +23,14 @@ void rtc_init() {
   // Note: time is always set in 24h format
   // Note: month value ranges from 1 (Jan) to 12 (Dec)
   // Note: date value ranges from 1 to 31
-  rtc.setTime(2025, 3, 20, 30, 0, 0, 0);
+  rtc.setTime(2025, 3, 4,20, 16, 45, 0);
   
+} 
+
+unsigned long rtcGetTimeLong(){
+
+uint32_t unixtime = rtc.getUnixTime();
+
+return unixtime;
 }
+

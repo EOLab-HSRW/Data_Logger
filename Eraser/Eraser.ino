@@ -12,7 +12,7 @@ void setup() {
 
   // Reset EEPROM , Parameter: uint_16 size for amount of Bytes to overwrite
   // Example First 200 Bytes to 0xFF
-  reset(200);
+  reset(256);
 
   // Configure the Address 
   configAddress();

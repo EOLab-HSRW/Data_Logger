@@ -1,4 +1,4 @@
-#include "WString.h"
+#include <Arduino.h>
 #include "sdcard.h"
 
 
@@ -10,18 +10,18 @@ void sdcard_init() {
   }
 }
 
-String combineToString(long *data, size_t size) {
-
-  String log_entry = "";
-
-  for(unsigned long long i = 0; i< size; i++){
-
-    log_entry = log_entry + String(data[i]) + "," ;
+String combineToString(long* data, size_t size) {
+  String result = "";
+  for (size_t i = 0; i < size; i++) {
+    result += String(data[i]);
+    if (i < size - 1) {
+      result += ",";  // comma
+    }
   }
-
-  return log_entry;
-
+  result += "\n";  // new line
+  return result;
 }
+
 
 void readFile(const char *path) {
   Serial.printf("Reading file: %s\n", path);

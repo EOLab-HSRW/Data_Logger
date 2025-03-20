@@ -5,7 +5,7 @@
 #include "rtc.h"
 
 // Edit Here
-#define amountOfValues 4
+#define AMOUNTOFVALUES 4
 
 // There are two needed changes to reuse this sketch for your purpose
 // 1) Calculate the total amount of values that needs to be collected
@@ -14,9 +14,9 @@
 //    and use it here (Important the Return Value has to be long)
 
 // Environment Data Storage
-long environmentValues[amountOfValues];
+long environmentValues[AMOUNTOFVALUES];
 unsigned long timestamp;               // Declaration for using it in the loop
-const int measurement_interval = 10000; // 5 minutes
+const int measurement_interval = 5000; // 5 minutes
 
 
 
@@ -48,43 +48,27 @@ void setup() {
   sdcard_init();
   eeprom_init();
   bme680_init();
-
-
-  // Set the Date and time (RTC)
-  
-
+  rtc_init();
 
 }
 
 void loop() {
 
   // get current timestamp
-  timestamp = millis(); // replace with rtc if available
+  timestamp = rtcGetTimeLong();
   Serial.print("Timestamp: "); Serial.println(timestamp);
-
   // get current values of the sensor
   get_Values();
 
-  Serial.println("Sensor Values:");
-  Serial.print("Temperature: "); Serial.println(environmentValues[0]);
-  Serial.print("Pressure: "); Serial.println(environmentValues[1]);
-  Serial.print("Humidity: "); Serial.println(environmentValues[2]);
-  Serial.print("Gas Resistance: "); Serial.println(environmentValues[3]);
-
   // combine timestamp and current values
 
-    long data[amountOfValues+1];
-    memcpy(data, environmentValues, amountOfValues * sizeof(long));
-    memcpy(data +  amountOfValues , &timestamp, sizeof(long));
-    Serial.println("Data to be written to EEPROM:");
-    for (int i = 0; i < 5; i++) {
-  Serial.print("Data["); Serial.print(i); Serial.print("]: ");
-  Serial.println(data[i]);
-  }
+    long data[AMOUNTOFVALUES+1];
+    memcpy(data, environmentValues, AMOUNTOFVALUES * sizeof(long));
+    memcpy(data +  AMOUNTOFVALUES , &timestamp, sizeof(long));
+
 
   // get the length of the sensor value array
-  size_t size =  (sizeof(data) / sizeof(data[0])) ;
-  Serial.print("Data size: "); Serial.println(size);
+  size_t size = AMOUNTOFVALUES + 1;
 
   // write the data to the EEPROM   
   writeData(data, size);

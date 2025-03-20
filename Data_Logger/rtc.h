@@ -2,6 +2,7 @@
 #define RTC_H
 
 
-String formatToUTC();
+void rtc_init();
+unsigned long rtcGetTimeLong();
 
 #endif
