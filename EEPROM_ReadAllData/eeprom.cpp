@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#include <stdint.h> 
 #include <Wire.h>
 #include "Adafruit_EEPROM_I2C.h"
 
@@ -29,5 +31,8 @@ void eeprom_init() {
 
 // function for reading from eeprom
 char readData(unsigned long address) {
-  i2ceeprom.read(address);
+  return i2ceeprom.read(address);
+}
+void readBuffer(uint16_t addr, uint8_t *buffer, uint16_t num) {
+  i2ceeprom.read(addr,buffer,num);
 }

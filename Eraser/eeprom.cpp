@@ -30,18 +30,12 @@ void reset(long size){
   // Overwrite the Bytes by the amount of the size parameter 
   // default Value 0xFF for void
   for (int i = 0; i < size; i++) {
-    i2ceeprom.write(i, 0xFF);
+    i2ceeprom.write(i, 0x00);
   }
   Serial.println("Overwrite completed.");
 }
 
 void configAddress(){
-
-  // Overwrite the Bytes by the amount of the size parameter 
-  // default Value 0xFF for void
-  for (int i = 0; i < 8; i++) {
-    i2ceeprom.write(i, 0x00);
-  }
 
   // Setting the default Value for the Address Counter 
   // (0x20 (16)  =  32 (10) = 0010 0000 (Shift by 2 to left for matching the position in meta data) = 1000 = 8 .th Byte next free Address  0-7 Meta)
