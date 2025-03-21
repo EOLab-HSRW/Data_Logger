@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <stdint.h> 
+#include "rtc.h"
 #include "eeprom.h"
 #define METADATABYTES 8
 #define SENSORDATABYTES 4
@@ -63,13 +64,15 @@ String getSensorData(uint16_t counterAddress, int i) {
   char four = buffer[3];
 
   // Combine to long
-  long value = ((long)(one << 24)) + ((long)(two << 16)) + ((long)(three << 8)) + (long)four;
+  unsigned long value = ((unsigned long)(one << 24)) + ((unsigned long)(two << 16)) + ((unsigned long)(three << 8)) + (unsigned long)four;
 
   //  (i+1) % 5 because of index starting by 0 
 
   if(i != 0 && (i + 1) % 5 == 0) {
     // if the next value is the timestamp than don t divide it by 100
-    return String(value) + ", \n";
+    // Use Timelib for Converting the unsigned long to UTC (because of same length) 
+    String time = formatToUTC(value);  // format
+    return time + ", \n";
   } 
   else{
     // Divide to get float values

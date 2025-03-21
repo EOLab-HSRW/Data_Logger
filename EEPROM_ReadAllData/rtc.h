@@ -1,7 +1,10 @@
 #ifndef RTC_H
 #define RTC_H
 
+#include <TimeLib.h>
+#include <Arduino.h>
+#include <stdint.h> 
 
-String formatToUTC(int year, int month, int day, int hour, int minute, int second);
+String formatToUTC(time_t time);
 
 #endif
