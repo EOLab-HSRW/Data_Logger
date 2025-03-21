@@ -79,7 +79,11 @@ void loop() {
   writeFile("/data.csv", log_entry.c_str());
 
   // delay until next measurement time
-  delay(measurement_interval);
+  // delay(measurement_interval);
+
+  // Deep Sleep
+  esp_sleep_enable_timer_wakeup(5 * 60 * 1000000);  // 5 Min = 5 * 60 = 300 Sekunde * 1 000 000 Mikrosekunde = 300 000 000 Mikrosekunde 
+  esp_deep_sleep_start();
 
   }
 
