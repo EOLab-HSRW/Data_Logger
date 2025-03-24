@@ -38,64 +38,64 @@ void get_Values() {
 void setup() {
 
   if (esp_sleep_get_wakeup_cause() == ESP_SLEEP_WAKEUP_TIMER) {
-    Serial.println("Aufgewacht aus Deep Sleep!");
+    Serial.println("woke up from deep sleep!");
   } else {
-    Serial.println("Normaler Start!");
+    Serial.println("normal start!");
   }
 
   Serial.begin(115200);
  
-  delay(100);  // Warten, bis die serielle Verbindung bereit ist
+  delay(100);  // wait until serial communication established
 
   Serial.println("ESP32 startet...");
 
-  // SD-Karte initialisieren
-  for (int i = 0; i < 3; i++) {  // 3 Versuche
+  //  initialise sd card module
+  for (int i = 0; i < 3; i++) {  // try 3 times
     if (sdcard_init()) {
       sd_ok = true;
       break;
     }
-    Serial.println("⚠️ SD-Karten-Init fehlgeschlagen, versuche erneut...");
+    Serial.println("⚠️ sd-card-init failed, please retry...");
     delay(500);
   }
 
-  // EEPROM initialisieren
+  // initialise eeprom
   for (int i = 0; i < 3; i++) {
     if (eeprom_init()) {
       eeprom_ok = true;
       break;
     }
-    Serial.println("⚠️ EEPROM-Init fehlgeschlagen, versuche erneut...");
+    Serial.println("⚠️ EEPROM-Init failed, please retry...");
     delay(500);
   }
 
-  // BME680 initialisieren
+  // initialise bme680 module
   for (int i = 0; i < 3; i++) {
     if (bme680_init()) {
       bme_ok = true;
       break;
     }
-    Serial.println("⚠️ BME680-Init fehlgeschlagen, versuche erneut...");
+    Serial.println("⚠️ BME680-Init failed, please retry...");
     delay(500);
   }
 
-  // RTC initialisieren
+  // initialise rtc module
   for (int i = 0; i < 3; i++) {
     if (rtc_init()) {
       rtc_ok = true;
       break;
     }
-    Serial.println("⚠️ RTC-Init fehlgeschlagen, versuche erneut...");
+    Serial.println("⚠️ RTC-Init failed, please retry...");
     delay(500);
   }
 
   if (!sd_ok || !eeprom_ok || !bme_ok || !rtc_ok) {
-    Serial.println("🚨 Fehler bei der Initialisierung eines oder mehrerer Module! Neustart...");
+    Serial.println("🚨 Failed to initialising one ore more modules ! restarting...");
     delay(5000);
     ESP.restart();
   }
 
-  Serial.println("✅ Alle Module erfolgreich initialisiert!");
+  Serial.println("✅ Successfully initialised all modules !");
 }
 
 void loop() {
@@ -128,6 +128,6 @@ void loop() {
 
   Serial.println("Sleeping for 30 seconds !");
   // Deep Sleep
-  esp_sleep_enable_timer_wakeup(30 * 1000000);  // 5 Min = 5 * 60 = 300 Sekunde * 1 000 000 Mikrosekunde = 300 000 000 Mikrosekunde
+  esp_sleep_enable_timer_wakeup(30 * 1000000);  // 5 Min = 5 * 60 = 300 seconds * 1 000 000 mikroseconds = 300 000 000 microseconds
   esp_deep_sleep_start();
 }

@@ -12,10 +12,11 @@ Melopero_RV3028 rtc;
 bool rtc_init() {
   Wire.begin();
   rtc.initI2C();
-  Serial.println( String( rtc.getYear() ) );
   return true;
 } 
 unsigned long rtcGetTimeLong(){
+
+// Setting the current value as timestamp to easily get easily the needed format
 
 uint16_t year = rtc.getYear();
 uint8_t month = rtc.getMonth();
@@ -24,7 +25,10 @@ uint8_t hour = rtc.getHour();
 uint8_t minute = rtc.getMinute();
 uint8_t second = rtc.getSecond();
 
+
+// struct for setting the valuue
 tmElements_t tm;
+// year needs to be a vlue that is the result of the subtraction from current year and 1970
 tm.Year = year - 1970 ;   
 tm.Month = month;
 tm.Day = day;
