@@ -144,15 +144,6 @@ First **8 bytes (64 bits)** are reserved as metadata:
 
 ## Power Consumption Simulation
 
-The Device has been Tested for following Parameters : 
-
-- Duration of Code Execution (sec)
-- Sleep Time (sec)
-- Consumption (during execution (mA))
-- Consumption (during sleep mode (µA))
-- Power of Battery (mAh)
-- Discharge Safety (%)
-
 ### Normal Mode
 
 ![Normal Mode Test Results](./Assets/Loop_Cycle_Power_Consumption.png)
