@@ -7,7 +7,7 @@ unsigned long eepromSize = MAXADD;
 
 
 // Initialising the EEPROM
-void eeprom_init() {
+bool eeprom_init() {
 
   //------------------------------------------------------------------------------ It is possible to extreact the power supply into a seperate function
 
@@ -22,11 +22,13 @@ void eeprom_init() {
   if (i2ceeprom.begin(EEPROM_ADDR))
     {  
       Serial.println("Found I2C EEPROM");
+      return true;
     }
    else 
     {      
       while (1)
       {
+        return false;
         Serial.println("I2C EEPROM not identified ... check your connections?\r\n");
         delay(10);
       }     

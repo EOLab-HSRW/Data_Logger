@@ -9,7 +9,7 @@
 #include <Arduino.h> // required for Serial
 
 extern Adafruit_EEPROM_I2C i2ceeprom;
-void eeprom_init();
+bool eeprom_init();
 void readData(long address);
 void writeData(long* data, size_t size);
 long getCounter();

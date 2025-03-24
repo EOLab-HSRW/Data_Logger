@@ -3,6 +3,5 @@
 
 
 bool rtc_init();
-unsigned long rtcGetTimeLong();
 
 #endif

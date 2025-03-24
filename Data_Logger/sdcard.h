@@ -5,7 +5,7 @@
 #include <SD.h>
 #include <Arduino.h> // required for Serial
 
-void sdcard_init();
+bool sdcard_init();
 void readFile(const char *path);
 void writeFile(const char *path, const char *message);
 void deleteFile(const char *path);
