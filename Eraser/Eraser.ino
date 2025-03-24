@@ -11,9 +11,7 @@ void setup() {
 
   // Instantiate
   rtc_init();
-  delay(100);
   eeprom_init();
-  delay(100);
   
 
   // Reset EEPROM , Parameter: uint_16 size for amount of Bytes to overwrite

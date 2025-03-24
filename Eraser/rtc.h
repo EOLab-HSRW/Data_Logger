@@ -2,6 +2,6 @@
 #define RTC_H
 
 
-bool rtc_init();
+void rtc_init();
 
 #endif

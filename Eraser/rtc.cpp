@@ -8,7 +8,7 @@
 
 Melopero_RV3028 rtc;
 
-bool rtc_init() {
+void rtc_init() {
   Wire.begin();
   rtc.initI2C();
  // Setting Power Switching Config (in case of disconnection from power to activate directly to backup supply) 
@@ -21,8 +21,10 @@ bool rtc_init() {
   uint8_t date = 24;
   uint8_t hour = 15;
   uint8_t minute = 17;
-  uint8_t second = 0;
-  rtc.setTime(year, month, date, weekday, hour, minute, second);
-  return true;
+  uint8_t second = 1;
+
+  Serial.println("Date:" + String(year));
+
+  rtc.setTime(year, month, weekday, date, hour, minute, second);
 } 
 
