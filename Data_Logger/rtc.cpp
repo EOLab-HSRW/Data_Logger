@@ -1,36 +1,46 @@
+#include "esp32-hal.h"
 #include "Melopero_RV3028.h" //http://librarymanager/All#Melopero_RV3028
 #include <Wire.h>
 #include <Arduino.h>
 #include <stdint.h> 
 #include "rtc.h"
+#include <TimeLib.h>
 
 
 Melopero_RV3028 rtc;
 
-void rtc_init() {
+bool rtc_init() {
   Wire.begin();
   rtc.initI2C();
- 
- // Setting Power Switching Config (in case of disconnection from power to activate directly to backup supply) 
-  rtc.writeToRegister(0x35,0x00);  
-  rtc.writeToRegister(0x37,0xB4);
-  
-  // Set Time Format from 12 to 24 Hours
-  rtc.set24HourMode();
-
-  // Set the date and time
-  // year, month, weekday, date, hour, minute, second
-  // Note: time is always set in 24h format
-  // Note: month value ranges from 1 (Jan) to 12 (Dec)
-  // Note: date value ranges from 1 to 31
-  rtc.setTime(2025, 3, 4,20, 16, 45, 0);
-  
+  Serial.println( String( rtc.getYear() ) );
+  return true;
 } 
-
 unsigned long rtcGetTimeLong(){
 
-uint32_t unixtime = rtc.getUnixTime();
+uint16_t year = rtc.getYear();
+uint8_t month = rtc.getMonth();
+uint8_t day = rtc.getDate();
+uint8_t hour = rtc.getHour();
+uint8_t minute = rtc.getMinute();
+uint8_t second = rtc.getSecond();
 
-return unixtime;
+tmElements_t tm;
+tm.Year = year - 1970 ;   
+tm.Month = month;
+tm.Day = day;
+tm.Hour = hour;
+tm.Minute = minute;
+tm.Second = second;
+
+String serial = String(rtc.getYear()) +"///"+ String(year)+"-"+String(month)+"-"+String(day)+"T"+" "+String(hour)+":"+String(minute)+":"+String(second)+"Z"; 
+
+Serial.println(serial.c_str());
+
+time_t unixtime = makeTime(tm);
+Serial.println("Timestamp"+String(unixtime));
+unsigned long tim = (unsigned long) unixtime;  
+
+return tim;
 }
+
 

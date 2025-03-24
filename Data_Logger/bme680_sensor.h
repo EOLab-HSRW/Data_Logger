@@ -9,7 +9,7 @@
 #include <Arduino.h> // required Serial
 
 extern Adafruit_BME680 bme;
-void bme680_init();
+bool bme680_init();
 void get_Environment(long values[]); 
 
 #endif

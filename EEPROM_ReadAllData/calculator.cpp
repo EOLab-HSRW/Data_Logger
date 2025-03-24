@@ -71,8 +71,9 @@ String getSensorData(uint16_t counterAddress, int i) {
   if(i != 0 && (i + 1) % 5 == 0) {
     // if the next value is the timestamp than don t divide it by 100
     // Use Timelib for Converting the unsigned long to UTC (because of same length) 
-    String time = formatToUTC(value);  // format
-    return time + ", \n";
+    time_t time = (time_t) value;
+    String times = formatToUTC(value);  // format
+    return times + ", \n";
   } 
   else{
     // Divide to get float values

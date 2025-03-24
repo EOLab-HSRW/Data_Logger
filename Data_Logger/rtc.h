@@ -2,7 +2,7 @@
 #define RTC_H
 
 
-void rtc_init();
+bool rtc_init();
 unsigned long rtcGetTimeLong();
 
 #endif
