@@ -12,6 +12,7 @@ This project simplifies data logging to external storage (SD card / EEPROM).
 - [Data Types](#data-types)
 - [EEPROM Data Storage Simulation](#eeprom-data-storage-simulation)
 - [Data Storage Management](#data-storage-management)
+- [Power Consumption Simulation](#power-consumption-simulation)
 
 ## Hardware
 
@@ -140,3 +141,22 @@ First **8 bytes (64 bits)** are reserved as metadata:
 
 - Prevents conflicts when changing sensors.
 - A separate sketch will be added soon.
+
+## Power Consumption Simulation
+
+The Device has been Tested for following Parameters : 
+
+- Duration of Code Execution (sec)
+- Sleep Time (sec)
+- Consumption (during execution (mA))
+- Consumption (during sleep mode (µA))
+- Power of Battery (mAh)
+- Discharge Safety (%)
+
+### Normal Mode
+
+![Normal Mode Test Results](./Assets/Loop_Cycle_Power_Consumption.png)
+
+### DeepSleep Mode
+
+![DeepSleep Mode Test Results](./Assets/DeepSleep_Power_Consumption.png)
