@@ -26,12 +26,12 @@ This project simplifies data logging to external storage (SD card / EEPROM).
 | RAK15000   | 15.96     | EEPROM module                               |
 | RAK15002   | 04.90     | SD card module                              |
 | RAK12002   | 09.50     | RTC Module                                  |
-| RAK19011   | 20.90     | Developement Board                                    |
-| RAK19012   | 06.90     | Developement Board                                    |
-| RAK5802    | 07.97     | Interface                                    |
+| RAK19011   | 20.90     | Development Board                           |
+| RAK19012   | 06.90     | Development Board                           |
+| RAK5802    | 07.97     | Interface                                   |
 | RAK1906    | 20.21     | Environmental sensor module                 |
 | RS485      | 06.00     | Liquid level sensor + connector             |
-| **Total**  | **129,16** |                                              |
+| **Total**  | **129.16** |                                           |
 
 ## Documentation
 
@@ -115,32 +115,43 @@ For datasheets, quick guides, and detailed descriptions, visit:
 - **Address range:** 16-bit (0x0000 to 0xFFFF)  
 - **Note:** May contain pre-configured LoRaWAN data.
 
-## Data Storage Management
+## **Metadata and Storage Layout**
 
-First **8 bytes (64 bits)** are reserved as metadata:
+EEPROM data storage is structured to ensure efficient tracking and retrieval. 
+The first **8 bytes (64 bits)** are reserved for metadata:
 
 1. **Write Counter** (20-bit) → Tracks total write cycles  
-2. **Storage Position Counter** (18-bit) → Tracks next writable address  
+2. **Storage Position Counter** (18-bit) → Tracks the next writable address
+3. **Empty Bits** (26 Bits) -> For Future Usage
 
-**Total:** 38 bits (26 bits reserved for future use)
+**Total Metadata Size:** 64 bits
 
-- Write Counter needs **20 bits** (1,000,000 cycles = 0xF4240)  
-- Storage Position Counter needs **18 bits** (max. 262,144 addresses)  
-- Allocating **8 bytes** ensures scalability for future enhancements.
+- **Write Counter:** 20 bits (supports up to 1,000,000 cycles = `0xF4240`)  
+- **Storage Position Counter:** 18 bits (supports up to 262,144 addresses)  
+- **Total Reserved Space:** 8 bytes
 
-## EEPROM Data Reader
+## EEPROM Data Reader / Decoder
 
-- A separate sketch is available in the project folder.
-
-## EEPROM Decoder
-
-- Required after sensor/context switching.
-- A separate sketch will be added soon.
+### **Reading Process**
+EEPROM contains two main sections:  
+1. **Metadata:** First **8 bytes** (Indexes 0-7) store counters and tracking information.  
+2. **Sensor Data Blocks:** Data is stored in **sets of 32 bytes**, following a specific sequence:
+   - Temperature  
+   - Pressure  
+   - Humidity  
+   - Gas resistance  
+   - RTC timestamp
 
 ## Data Erasure Before Switching Context/Sensors
 
-- Prevents conflicts when changing sensors.
-- A separate sketch will be added soon.
+### Steps to Erase Data:
+
+1. **Collected Data Backup:** Before erasing, ensure any necessary data is backed up.
+2. **Overwrite:** With standart Value of 0x00.
+3. **Metadata Reset:** is done automatically by step 2 (Overwrite).
+4. **Metadata Configuration:** Setting the Address Counter to Byte 8 (0-7 Metadata).
+5. **Date and Time Configuration:** Setting the Date and Time of the RTC. 
+
 
 ## Power Consumption Simulation
 
