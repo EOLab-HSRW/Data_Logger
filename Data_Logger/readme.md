@@ -67,15 +67,21 @@ The project consists of several modules:
 ## **4. Functions Summary**
 | Function Name         | File               | Description |
 |----------------------|-------------------|-------------|
-| `get_Values()`       | datalogger.ino     | Retrieves sensor data and prints it via serial. |
-| `bme680_init()`      | bme680_sensor.cpp  | Initializes the BME680 sensor. |
-| `get_Environment()`  | bme680_sensor.cpp  | Reads sensor values and converts them to integers. |
-| `eeprom_init()`      | eeprom.cpp         | Initializes and verifies EEPROM availability. |
-| `readData()`         | eeprom.cpp         | Reads data from EEPROM. |
-| `writeData()`        | eeprom.cpp         | Writes data to EEPROM and increments the address counter. |
-| `readFile()`         | sdcard.cpp         | Reads a file from the SD card and prints its content. |
-| `writeFile()`        | sdcard.cpp         | Appends data to an SD card file with CSV formatting. |
-| `deleteFile()`       | sdcard.cpp         | Deletes a specified file from the SD card. |
+| `void get_Values()`       | datalogger.ino     | Retrieves sensor data and prints it via serial. |
+| `bool bme680_init()`      | bme680_sensor.cpp  | Initializes the BME680 sensor. |
+| `void get_Environment()`  | bme680_sensor.cpp  | Reads sensor values and converts them to integers. |
+| `bool eeprom_init()`      | eeprom.cpp         | Initializes and verifies EEPROM availability. |
+| `void readData()`         | eeprom.cpp         | Reads data from EEPROM. |
+| `void writeData()`        | eeprom.cpp         | Writes data to EEPROM and increments the address counter. |
+| `long getCounter()`         | eeprom.cpp         | Returns the extracted Total Counter. |
+| `void setCounter()`         | eeprom.cpp         | Sets the Total Counter.|
+| `void getAddress()`         | eeprom.cpp         | Returns the extracted Address Counter. |
+| `void setAddress()`         | eeprom.cpp         | Sets the Address Counter.|
+| `void readFile()`         | sdcard.cpp         | Reads a file from the SD card and prints its content. |
+| `void writeFile()`        | sdcard.cpp         | Appends data to an SD card file with CSV formatting. |
+| `void deleteFile()`       | sdcard.cpp         | Deletes a specified file from the SD card. |
+| `void rtc_init()`         | rtc.cpp            | Initializes and verifies RTC availability. |
+| `unsigned long rtcGetTimeLong()`| rtc.cpp      |  Returns the current time.|
 
 ## **5. Isolation of Counter and Storage Data**
 
@@ -133,11 +139,4 @@ The project consists of several modules:
 | **5** | Perform an OR operation with `val1` and `val3` from behind and set the first and third bytes |
 
 ---
-
-## **6. Future Enhancements**
-- **RTC Integration:** Implement timestamp retrieval for data logging.
-- **Dynamic Sensor Expansion:** Add support for multiple sensors with flexible data structures.
-- **Error Handling Improvements:** Implement retry mechanisms for failed sensor readings.
-
-This documentation provides an overview of the system’s architecture and functionalities.
 
