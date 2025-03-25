@@ -1,14 +1,9 @@
-# Data Logger Modification
+# Modified Data Logger / Addition of the Liquid Level Sensor
 
-## RS485 Liquid Level Sensor (S-YW-01B)
+## RS485 Liquid Level Sensor
 
 ### Overview
-The **RS485 Liquid Level Sensor (S-YW-01B)** is a high-precision sensor designed for measuring liquid levels. It communicates using the **Modbus-RTU protocol** and is suitable for various applications, including:
-
-- Reservoir and deep well monitoring  
-- Wastewater treatment  
-- River and marine monitoring  
-- Tank level measurement  
+The **RS485 Liquid Level Sensor** is a high-precision sensor designed for measuring liquid levels. 
 
 ### Features
 **Anti-corrosion material** – Durable and resistant  
@@ -34,32 +29,13 @@ The sensor is connected via an **Aviation Connector** interface. The pin configu
 
 | Pin | Description        |
 |-----|-------------------|
-| 1   | 12V Power Supply  |
-| 2   | 5V Power Supply   |
-| 3   | RS485 A (-)       |
-| 4   | RS485 B (+)       |
-| 5   | GND (Ground)      |
+| 12V (RAK5801)   | 12V Power Supply (VCC Sensor)  |
+| A1  (RAK5801)   | GND (GND Sensor)               |
 
 ## Modbus-RTU Communication
 ### Default Communication Settings:
 - **Baud Rate**: 9600 bps (supports 1200–115200 bps)
   **Note:** Changes to baud rate and slave address take effect immediately. If not, restart the sensor.
-
-
-- **Data Bits**: 8
-- **Parity**: None
-- **Stop Bits**: 1
-- **Default Slave Address**: `0x1A`
-
-### Example Command (Read Slave Address)
-| Address | Function | Start Address | Number of Registers | CRC16 (L) | CRC16 (H) |
-|---------|---------|---------------|---------------------|-----------|-----------|
-| `0x1A`  | `0x03`  | `0x0000`      | `0x0001`           | `0x87`    | `0xE1`    |
-
-### Response Format
-| Address | Function | Data Length | Value (H) | Value (L) | CRC16 (L) | CRC16 (H) |
-|---------|---------|-------------|-----------|-----------|-----------|-----------|
-| `0x1A`  | `0x03`  | `0x02`      | `0x00`    | `0x01`    | `0x1D`    | `0x86`    |
 
 
 ## RAK5801 Sensor Module
