@@ -26,12 +26,12 @@ This project simplifies data logging to external storage (SD card / EEPROM).
 | RAK15000   | 15.96     | EEPROM module                               |
 | RAK15002   | 04.90     | SD card module                              |
 | RAK12002   | 09.50     | RTC Module                                  |
-| RAK19011   | -         | Reserved                                    |
-| RAK19012   | -         | Reserved                                    |
-| RAK5802    | 07.97     | Reserved                                    |
+| RAK19011   | 20.90     | Developement Board                                    |
+| RAK19012   | 06.90     | Developement Board                                    |
+| RAK5802    | 07.97     | Interface                                    |
 | RAK1906    | 20.21     | Environmental sensor module                 |
-| RS485      | -         | Liquid level sensor + connector             |
-| **Total**  | **95,36** |                                              |
+| RS485      | 06.00     | Liquid level sensor + connector             |
+| **Total**  | **129,16** |                                              |
 
 ## Documentation
 
