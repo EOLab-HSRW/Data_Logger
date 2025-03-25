@@ -46,6 +46,15 @@ The project consists of several modules:
   - Uses SPI communication for SD card access.
   - Supports CSV-style data logging with automatic separation.
   - Implements error handling for file operations.
+### **2.5 rtc.h / rtc.cpp**
+- **Purpose:** Real-Time Clock (RTC) management.
+- **Functionality:**
+  - Provides functions to retrieve the current time in a specified format.
+  - Uses I2C communication for interaction with the RTC module.
+  - Supports setting and updating the date and time.
+  - Includes functions for reading from and writing to the internal EEPROM.
+  - Implements error handling for RTC operations.
+
 
 ## **3. System Workflow**
 1. **Initialization:**
@@ -65,23 +74,24 @@ The project consists of several modules:
    - Serial messages indicate any failures, such as missing EEPROM or SD card issues.
 
 ## **4. Functions Summary**
-| Function Name         | File               | Description |
-|----------------------|-------------------|-------------|
-| `void get_Values()`       | datalogger.ino     | Retrieves sensor data and prints it via serial. |
-| `bool bme680_init()`      | bme680_sensor.cpp  | Initializes the BME680 sensor. |
-| `void get_Environment()`  | bme680_sensor.cpp  | Reads sensor values and converts them to integers. |
-| `bool eeprom_init()`      | eeprom.cpp         | Initializes and verifies EEPROM availability. |
-| `void readData()`         | eeprom.cpp         | Reads data from EEPROM. |
-| `void writeData()`        | eeprom.cpp         | Writes data to EEPROM and increments the address counter. |
-| `long getCounter()`         | eeprom.cpp         | Returns the extracted Total Counter. |
-| `void setCounter()`         | eeprom.cpp         | Sets the Total Counter.|
-| `void getAddress()`         | eeprom.cpp         | Returns the extracted Address Counter. |
-| `void setAddress()`         | eeprom.cpp         | Sets the Address Counter.|
-| `void readFile()`         | sdcard.cpp         | Reads a file from the SD card and prints its content. |
-| `void writeFile()`        | sdcard.cpp         | Appends data to an SD card file with CSV formatting. |
-| `void deleteFile()`       | sdcard.cpp         | Deletes a specified file from the SD card. |
-| `void rtc_init()`         | rtc.cpp            | Initializes and verifies RTC availability. |
-| `unsigned long rtcGetTimeLong()`| rtc.cpp      |  Returns the current time.|
+| Function Name                                           | File              | Description                                                             |
+|---------------------------------------------------------|-------------------|-------------------------------------------------------------------------|
+| `void get_Values()`                                     | datalogger.ino    | Retrieves sensor data and prints it via serial.                         |
+| `bool bme680_init()`                                    | bme680_sensor.cpp | Initializes the BME680 sensor.                                          |
+| `void get_Environment(long values[])`                   | bme680_sensor.cpp | Reads sensor values and converts them to integers.                      |
+| `bool eeprom_init()`                                    | eeprom.cpp        | Initializes and verifies EEPROM availability.                           |
+| `void readData(long address)`                           | eeprom.cpp        | Reads data from EEPROM.                                                 |
+| `void writeData(long* data, size_t size)`               | eeprom.cpp        | Writes data to EEPROM and increments the address counter.               |
+| `long getCounter()`                                     | eeprom.cpp        | Returns the extracted Total Counter.                                    |
+| `void setCounter(long counter)`                         | eeprom.cpp        | Sets the Total Counter.                                                 |
+| `void getAddress()`                                     | eeprom.cpp        | Returns the extracted Address Counter.                                  |
+| `void setAddress(long address)`                         | eeprom.cpp        | Sets the Address Counter.                                               |
+| `void readFile(const char *path)`                       | sdcard.cpp        | Reads a file from the SD card and prints its content.                   |
+| `void writeFile(const char *path, const char *message)` | sdcard.cpp        | Appends data to an SD card file with CSV formatting.                    |
+| `void deleteFile(const char *path)`                     | sdcard.cpp        | Deletes a specified file from the SD card.                              |
+| `String combineToString(long *data, size_t size)`       | sdcard.cpp         | Combines the collected data into one String.                           |
+| `void rtc_init()`                                       | rtc.cpp           | Initializes and verifies RTC availability.                              |
+| `unsigned long rtcGetTimeLong()`                        | rtc.cpp           |  Returns the current time.                                              |
 
 ## **5. Isolation of Counter and Storage Data**
 
