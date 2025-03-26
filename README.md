@@ -13,7 +13,7 @@ This project simplifies data logging to external storage (SD card / EEPROM).
 - [EEPROM Data Storage Simulation](#eeprom-data-storage-simulation)
 - [Data Storage Management](#data-storage-management)
 - [Power Consumption Simulation](#power-consumption-simulation)
-- [Power Consumption Simulation](#power-consumption-simulation-with-liquid-level-sensor)
+- [Power Consumption Simulation with Liquid Level Sensor](#power-consumption-simulation-with-liquid-level-sensor)
 - [Modification: Addition of Liquid Sensor](#modified-data-logger--addition-of-the-liquid-level-sensor)
 
 
@@ -212,7 +212,7 @@ Average power consumption during deep sleep was 54.71 mA over a duration of 2.89
 
 **Results:**
 
-![Battery Calculation Results](./Assets/power_efficiency_with_sensor.png)
+![Battery Calculation Results](./Assets/power_efficiency _with_sensor.png)
 
 Average power consumption during deep sleep was 287.22 µA over a duration of 29.51 seconds. The battery life calculation considered the following parameters:
 
