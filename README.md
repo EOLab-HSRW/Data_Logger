@@ -189,6 +189,40 @@ Average power consumption during deep sleep was 287.22 µA over a duration of 29
 
 Estimated battery life: approximately 4305 hours, equivalent to around 179 days and 9 hours. Estimated average power consumption per hour: 0.46 mAh.
 
+## Power Consumption Simulation with Liquid Level Sensor
+
+### Normal Mode
+
+![Normal Mode Test Results](./Assets/loopcycle_power_consumption.png)
+
+**Results:**
+
+Average power consumption during deep sleep was 54.71 mA over a duration of 2.894 seconds. The battery life calculation considered the following parameters:
+
+- Code execution duration: 3.9 seconds
+- Sleep time: 1200 seconds
+- Consumption during code execution: 55.03 mA
+- Consumption in sleep mode: 54.71 mA
+- Battery capacity: 2500 mAh with 20% discharge safety margin.
+
+### DeepSleep Mode
+
+![DeepSleep Mode Test Results](./Assets/deep_sleep_power_consumption.png)
+
+**Results:**
+
+![Battery Calculation Results](./Assets/power_efficiency_with_sensor.png)
+
+Average power consumption during deep sleep was 287.22 µA over a duration of 29.51 seconds. The battery life calculation considered the following parameters:
+
+- Code execution duration: 3.9 seconds
+- Sleep time: 1200 seconds
+- Consumption during code execution: 55.03 mA
+- Consumption in deep sleep mode: 287.21 µA
+- Battery capacity: 2500 mAh with 20% discharge safety margin.
+
+Estimated battery life: approximately 4305 hours, equivalent to around 179 days and 9 hours. Estimated average power consumption per hour: 0.46 mAh.
+
 ## Modified Data Logger / Addition of the Liquid Level Sensor
 
 ### RS485 Liquid Level Sensor
