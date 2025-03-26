@@ -13,6 +13,7 @@ This project simplifies data logging to external storage (SD card / EEPROM).
 - [EEPROM Data Storage Simulation](#eeprom-data-storage-simulation)
 - [Data Storage Management](#data-storage-management)
 - [Power Consumption Simulation](#power-consumption-simulation)
+- [Power Consumption Simulation](#power-consumption-simulation-with-liquid-level-sensor)
 - [Modification: Addition of Liquid Sensor](#modified-data-logger--addition-of-the-liquid-level-sensor)
 
 
