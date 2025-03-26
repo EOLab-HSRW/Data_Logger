@@ -1,7 +1,4 @@
 #include "rtc.h"
-#include <TimeLib.h>
-#include <stdint.h> 
-#include <Arduino.h>
 
 String formatToUTC(time_t time) {
   setTime(time);

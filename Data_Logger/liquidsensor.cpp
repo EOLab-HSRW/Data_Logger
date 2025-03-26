@@ -1,34 +1,50 @@
-#include <soc/soc.h>
-#include <stdint.h>
+#include "liquidsensor.h"
+#include <Arduino.h>
 
-#define	LUT_POINTS		                  20
-#define LUT_VREF_LOW                    1000
-#define LUT_VREF_HIGH                   1200
-#define LUT_ADC_STEP_SIZE               64
-#define LUT_POINTS                      20
-#define LUT_LOW_THRESH                  2880
-#define LUT_HIGH_THRESH                 (LUT_LOW_THRESH + LUT_ADC_STEP_SIZE)
 
-#define VREF_OFFSET                     1100
-#define DR_REG_EFUSE_BASE               0x3ff5A000
-#define EFUSE_BLK0_RDATA4_REG           (DR_REG_EFUSE_BASE + 0x010)
-#define VREF_REG                        EFUSE_BLK0_RDATA4_REG
-#define VREF_MASK                       0x1F
-#define VREF_FORMAT                     0
-#define VREF_STEP_SIZE                  7
+bool liquidsensor_init(){
+   // Setup
+	pinMode(WB_IO1, OUTPUT | PULLUP);
+	digitalWrite(WB_IO1, HIGH);
 
-#define EFUSE_ADC_VREF                  0x0000001F
-#define EFUSE_ADC_VREF_V                0x1F
-#define EFUSE_ADC_VREF_S                8
-#define EFUSE_ADC_VREF_M                ((EFUSE_ADC_VREF_V)<<(EFUSE_ADC_VREF_S))
+	adcAttachPin(WB_A1);
+
+	analogSetAttenuation(ADC_11db);
+	analogReadResolution(12);
+  return true;
+}
+
+
+unsigned long getCurrent(){
+  int i;
+	int sensor_pin = WB_A1; // select the input pin for the potentiometer
+	int mcu_ain_raw = 0;
+	int average_adc_raw;
+	float voltage_mcu_ain;  //mv as unit
+	float current_sensor; // variable to store the value coming from the sensor
+
+	for (i = 0; i < NO_OF_SAMPLES; i++)
+	{
+		mcu_ain_raw += analogRead(sensor_pin);
+	}
+	average_adc_raw = mcu_ain_raw / NO_OF_SAMPLES;
+
+	voltage_mcu_ain = esp_adc_cal_raw_to_voltage(average_adc_raw);
+
+	current_sensor = voltage_mcu_ain / 149.9*1000; //WisBlock RAK5801 (0 ~ 20mA) I=U/149.9 (mA)
+	
+  unsigned long curr = (unsigned long)(current_sensor *100);
+
+  return curr;
+}
 
 //20 Point lookup tables, covering ADC readings from 2880 to 4096, step size of 64
-static const uint32_t lut_adc1_low[LUT_POINTS] = {2240, 2297, 2352, 2405, 2457, 2512, 2564, 2616, 2664, 2709,
+const uint32_t lut_adc1_low[LUT_POINTS] = {2240, 2297, 2352, 2405, 2457, 2512, 2564, 2616, 2664, 2709,
                                                   2754, 2795, 2832, 2868, 2903, 2937, 2969, 3000, 3030, 3060};
-static const uint32_t lut_adc1_high[LUT_POINTS] = {2667, 2706, 2745, 2780, 2813, 2844, 2873, 2901, 2928, 2956,
+const uint32_t lut_adc1_high[LUT_POINTS] = {2667, 2706, 2745, 2780, 2813, 2844, 2873, 2901, 2928, 2956,
                                                    2982, 3006, 3032, 3059, 3084, 3110, 3135, 3160, 3184, 3209};
 //Only call when ADC reading is above threshold
-static uint32_t calculate_voltage_lut(uint32_t adc, uint32_t vref)
+uint32_t calculate_voltage_lut(uint32_t adc, uint32_t vref)
 {
     //Get index of lower bound points of LUT
     uint32_t i = (adc - LUT_LOW_THRESH) / LUT_ADC_STEP_SIZE;
@@ -53,7 +69,7 @@ static uint32_t calculate_voltage_lut(uint32_t adc, uint32_t vref)
     return (uint32_t)voltage;
 }
 
-static inline int decode_bits(uint32_t bits, uint32_t mask, bool is_twos_compl)
+inline int decode_bits(uint32_t bits, uint32_t mask, bool is_twos_compl)
 {
     int ret;
     if (bits & (~(mask >> 1) & mask)) 
@@ -77,16 +93,19 @@ static inline int decode_bits(uint32_t bits, uint32_t mask, bool is_twos_compl)
     return ret;
 }
 
-static uint32_t read_efuse_vref(void)
-{
-    //eFuse stores deviation from ideal reference voltage
-    uint32_t ret = VREF_OFFSET;       //Ideal vref
-    uint32_t bits = REG_GET_FIELD(VREF_REG, EFUSE_ADC_VREF);
-    ret += decode_bits(bits, VREF_MASK, VREF_FORMAT) * VREF_STEP_SIZE;
-    return ret;     //ADC Vref in mV
+
+uint32_t read_efuse_vref(void) {
+    esp_adc_cal_characteristics_t adc_chars;
+    
+    // Charakterisiere den ADC mit Standard-VREF 1100 mV
+    esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, 1100, &adc_chars);
+    
+    // Gib die ausgelesene eFuse-VREF zurück
+    return adc_chars.vref;
 }
 
-static inline uint32_t interpolate_two_points(uint32_t y1, uint32_t y2, uint32_t x_step, uint32_t x)
+
+inline uint32_t interpolate_two_points(uint32_t y1, uint32_t y2, uint32_t x_step, uint32_t x)
 {
     //Interpolate between two points (x1,y1) (x2,y2) between 'lower' and 'upper' separated by 'step'
     return ((y1 * x_step) + (y2 * x) - (y1 * x) + (x_step / 2)) / x_step;

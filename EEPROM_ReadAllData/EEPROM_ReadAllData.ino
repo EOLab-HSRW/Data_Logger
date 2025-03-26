@@ -6,6 +6,9 @@
 #include "calculator.h"
 
 
+// Value Size
+
+int valueSize = 6;
 
 void setup() {
 
@@ -26,7 +29,7 @@ void setup() {
 
   // Varaibales for getting Sensor Data
   String buffer = "";
-  uint16_t readAmount = 50; // amount of how many values has to be read (if all possible values (262.144 - 8(Meta) = 262.136 / 4 (Bytes per Value) = 65.534))
+  uint16_t readAmount = 120; // amount of how many values has to be read (if all possible values (262.144 - 8(Meta) = 262.136 / 4 (Bytes per Value) = 65.534))
   uint16_t counterAddress = 8;
 
   // Loop for Concate Sensor Values
@@ -35,7 +38,7 @@ void setup() {
     // if it is not the first iteration and 32 Bytes (8 Values) are already in the Buffer (set the size of values to 32Bytes to avoid Stack Overflow)
     if ( counterAddress > 0 && (counterAddress - 8) % 32 == 0) {
 
-      buffer = buffer + getSensorData(counterAddress,i);
+      buffer = buffer + getSensorData(counterAddress,i,valueSize);
       // Write to Sd Card
       writeFile("/Eeprom.csv", buffer.c_str());
 
@@ -44,7 +47,7 @@ void setup() {
     }
     // if it is the first iteration and no 32  Bytes are in the Buffer
     else {
-      buffer = buffer + getSensorData(counterAddress,i);
+      buffer = buffer + getSensorData(counterAddress,i,valueSize);
     }
    
 

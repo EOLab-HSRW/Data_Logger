@@ -3,6 +3,6 @@
 
 
 String getMetaData();
-String getSensorData(uint16_t counterAddress,int i);
+String getSensorData(uint16_t counterAddress,int i, int size);
 
 #endif

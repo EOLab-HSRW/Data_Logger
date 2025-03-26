@@ -16,8 +16,11 @@ String combineToString(long* data, size_t size) {
   for (size_t i = 0; i < size; i++) {
 
     	// Checking for every 5.th Value (Timestamp)
-    if(i != 0 && (i+1) % 5 == 0){
-      result += String(data[i])+",";
+    if(i != 0 && (i+1) % size == 0){
+
+      time_t time = (time_t) data[i];
+      String times = formatToUTC(time);  // format
+      result += times;
     }
     else{
       float division = (float)data[i]/100;

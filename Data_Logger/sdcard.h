@@ -4,6 +4,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include <Arduino.h> // required for Serial
+#include "rtc.h"
 
 bool sdcard_init();
 void readFile(const char *path);

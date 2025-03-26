@@ -1,6 +1,7 @@
 #ifndef LIQUIDSENSOR_H
 #define LIQUIDSENSOR_H
 
+#include <Arduino.h>
 #include <stdint.h>
 #include "esp_adc_cal.h"  
 

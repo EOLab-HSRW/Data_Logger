@@ -1,12 +1,14 @@
 
 #include <Arduino.h>
+#include <stdint.h>
 #include "sdcard.h"
 #include "bme680_sensor.h"
 #include "eeprom.h"
 #include "rtc.h"
+#include "liquidsensor.h"
 
 // Edit Here
-#define AMOUNTOFVALUES 4
+#define AMOUNTOFVALUES 5
 
 // There are two needed changes to reuse this sketch for your purpose
 // 1) Calculate the total amount of values that needs to be collected
@@ -23,6 +25,7 @@ bool sd_ok = false;
 bool eeprom_ok = false;
 bool bme_ok = false;
 bool rtc_ok = false;
+bool liquidsensor_ok = false;
 
 
 
@@ -31,6 +34,7 @@ void get_Values() {
 
   // Get the Values of the Environment Sensor
   get_Environment(environmentValues);
+  environmentValues[4] = (long) getCurrent();
 
   // Append here other Sensors ....
 }
@@ -88,8 +92,21 @@ void setup() {
     Serial.println("⚠️ RTC-Init failed, please retry...");
     delay(500);
   }
+  
+  
+  // initialise liquidsensor
+  for (int i = 0; i < 3; i++) {
+    if (liquidsensor_init()) {
+      liquidsensor_ok = true;
+      break;
+    }
+    Serial.println("⚠️ Liquidsensor-Init failed, please retry...");
+    delay(500);
+  }
 
-  if (!sd_ok || !eeprom_ok || !bme_ok || !rtc_ok) {
+  
+
+  if (!sd_ok || !eeprom_ok || !bme_ok || !rtc_ok || !liquidsensor_ok ) {
     Serial.println("🚨 Failed to initialising one ore more modules ! restarting...");
     delay(5000);
     ESP.restart();

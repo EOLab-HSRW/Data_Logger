@@ -48,12 +48,12 @@ String getMetaData() {
   String addressString = String(address);
   String free = String(freespace);
 
-  String meta = counter + "," + addressString + "," + free + ",";
+  String meta = counter + "," + addressString + "," + free +"\n";
 
   return meta;
 }
 
-String getSensorData(uint16_t counterAddress, int i) {
+String getSensorData(uint16_t counterAddress, int i,int size) {
 
   readBuffer(counterAddress, buffer, byteAmount);
 
@@ -68,12 +68,12 @@ String getSensorData(uint16_t counterAddress, int i) {
 
   //  (i+1) % 5 because of index starting by 0 
 
-  if(i != 0 && (i + 1) % 5 == 0) {
+  if(i != 0 && (i + 1) % 6 == 0) {
     // if the next value is the timestamp than don t divide it by 100
     // Use Timelib for Converting the unsigned long to UTC (because of same length) 
     time_t time = (time_t) value;
     String times = formatToUTC(value);  // format
-    return times + ", \n";
+    return times + "\n";
   } 
   else{
     // Divide to get float values

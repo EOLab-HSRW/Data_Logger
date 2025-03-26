@@ -1,8 +1,4 @@
-#include <Wire.h>
-#include "Adafruit_EEPROM_I2C.h"
-
-#define EEPROM_ADDR 0x50  // I2C Address
-#define MAXADD 262143     // Maximum Addresses
+#include "eeprom.h"
 
 // Instantiate I2C
 Adafruit_EEPROM_I2C i2ceeprom;

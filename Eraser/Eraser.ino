@@ -1,4 +1,5 @@
-
+#include <Arduino.h>
+#include <stdint.h> 
 #include "eeprom.h"
 #include "rtc.h"
 

@@ -1,10 +1,4 @@
-#include "esp32-hal.h"
-#include "Melopero_RV3028.h" //http://librarymanager/All#Melopero_RV3028
-#include <Wire.h>
-#include <Arduino.h>
-#include <stdint.h> 
 #include "rtc.h"
-#include <TimeLib.h>
 
 
 Melopero_RV3028 rtc;
@@ -45,6 +39,12 @@ Serial.println("Timestamp"+String(unixtime));
 unsigned long tim = (unsigned long) unixtime;  
 
 return tim;
+}
+
+String formatToUTC(time_t time) {
+  setTime(time);
+  String utc = String(year()) + "-" + String(month()) + "-" + String(day()) + "T" + String(hour()) + ":" + String(minute()) + ":" + String(second()) + "Z";
+  return utc;
 }
 
 
