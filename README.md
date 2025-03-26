@@ -198,13 +198,13 @@ Estimated battery life: approximately 4305 hours, equivalent to around 179 days 
 
 **Results:**
 
-Average power consumption during deep sleep was 54.71 mA over a duration of 2.894 seconds. The battery life calculation considered the following parameters:
+Average power consumption during deep sleep was 62.44 mA over a duration of 2.932 seconds. The battery life calculation considered the following parameters:
 
-- Code execution duration: 3.9 seconds
+- Code execution duration: 2.932 seconds
 - Sleep time: 1200 seconds
-- Consumption during code execution: 55.03 mA
-- Consumption in sleep mode: 54.71 mA
-- Battery capacity: 2500 mAh with 20% discharge safety margin.
+- Consumption during code execution: 62.44 mA
+- Consumption in sleep mode: 311.72 mA
+- Battery capacity: 4000 mAh with 20% discharge safety margin.
 
 ### DeepSleep Mode
 
@@ -214,15 +214,15 @@ Average power consumption during deep sleep was 54.71 mA over a duration of 2.89
 
 ![Battery Calculation Results](./Assets/power_efficiency_with_sensor.png)
 
-Average power consumption during deep sleep was 287.22 µA over a duration of 29.51 seconds. The battery life calculation considered the following parameters:
+Average power consumption during deep sleep was 311.72 µA over a duration of 29.57 seconds. The battery life calculation considered the following parameters:
 
-- Code execution duration: 3.9 seconds
+- Code execution duration: 2.932 seconds
 - Sleep time: 1200 seconds
-- Consumption during code execution: 55.03 mA
-- Consumption in deep sleep mode: 287.21 µA
-- Battery capacity: 2500 mAh with 20% discharge safety margin.
+- Consumption during code execution: 62.44 mA
+- Consumption in sleep mode: 311.72 mA
+- Battery capacity: 4000 mAh with 20% discharge safety margin.
 
-Estimated battery life: approximately 4305 hours, equivalent to around 179 days and 9 hours. Estimated average power consumption per hour: 0.46 mAh.
+Estimated battery life: approximately 6909 hours, equivalent to around 287 days and 21 hours. Estimated average power consumption per hour: 0.46 mAh.
 
 ## Modified Data Logger / Addition of the Liquid Level Sensor
 
