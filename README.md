@@ -177,6 +177,8 @@ Average power consumption during deep sleep was 54.71 mA over a duration of 2.89
 
 **Results:**
 
+![Battery Calculation Results](./Assets/power_efficiency.png)
+
 Average power consumption during deep sleep was 287.22 µA over a duration of 29.51 seconds. The battery life calculation considered the following parameters:
 
 - Code execution duration: 3.9 seconds
