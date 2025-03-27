@@ -33,3 +33,9 @@
 ![Base Outline Sketch Flat](./case/base_outline_sketch_flat.png)
 ![Base Outline Sketch Extrude](./case/base_outline_sketch_extrude.png)
 
+
+<! Steps 5-->
+![Top View](./case/view_top.png)
+![Front View](./case/view_front.png)
+![Side View](./case/view_side.png)
+![Endresult](./case/case.png)
