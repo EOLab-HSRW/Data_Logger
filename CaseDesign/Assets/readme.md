@@ -1,5 +1,5 @@
 # Case Design and Model
 
 
-![Base Sketch](./case-box4u/base.png)
+![Base Sketch](./case_box4u/base.png)
 
