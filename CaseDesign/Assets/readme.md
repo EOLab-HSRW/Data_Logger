@@ -5,7 +5,7 @@
 
 ![Lid Sketch](./case_box4u/lid.png)
 
-![Side View](./case_box4u/.png)
+![Side View](./case_box4u/side.png)
 
-![Detail of Screw](./case_box4u/base.png)
+![Detail of Screw](./case_box4u/screw.png)
 
