@@ -35,6 +35,7 @@
 
 
 <! Steps 5-->
+![View](./case/view1.png)
 ![Top View](./case/view_top.png)
 ![Front View](./case/view_front.png)
 ![Side View](./case/view_side.png)
