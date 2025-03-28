@@ -55,31 +55,52 @@ The board has the following specifications:
 
 ## 3D Modelling in Auto Fusion 360
 
-<! Steps 1-->
+### Step 1 : Basement
+
+We are starting with the sketch of the basement.
+For that we configure the sizes like mentioned earlier above.
 ![Base Sketch](./case/base_sketch.png)
 ![Base Sketch Flat](./case/base_sketch_flat.png)
+
+Then we extrude the needed areas for the sides and also the outer circles for the screws.
 ![Base Sketch Extrude](./case/base_sketch_extrude.png)
 
 
-<! Steps 2-->
+### Step 2 : Lid
+
+Next we also configure the sizes for the lid like step 1.
 ![Lid Sketch](./case/lid_sketch.png)
 ![Lid Sketch Flat](./case/lid_sketch_flat.png)
+
+We also extrude the specified areas.
 ![Lid Sketch Extrude](./case/lid_sketch_extrude.png)
 
 
-<! Steps 3-->
+### Step 3 : Board
+
+Now continue with the rak board sketch and set the sizes as shown in the sketch.
+
 ![Board Sketch](./case/board_sketch.png)
 ![Board Sketch Flat](./case/board_sketch_flat.png)
+
+We extrude the needed areas.
 ![Board Sketch Extrude](./case/board_sketch_extrude.png)
 
 
-<! Steps 4-->
+### Step 4 : Outline Basement
+
+Lastly we set the sizes for the basement outline to fasten the board on the case, which is not possible with only the board , because of missing according holes. 
+
 ![Base Outline Sketch](./case/base_outline_sketch.png)
 ![Base Outline Sketch Flat](./case/base_outline_sketch_flat.png)
+
+Then we are finishing it up with an extrude of the needed areas.
 ![Base Outline Sketch Extrude](./case/base_outline_sketch_extrude.png)
 
 
-<! Steps 5-->
+### Step 6 : Results
+The Results should be as follows:
+
 ![View](./case/view1.png)
 ![Top View](./case/view_top.png)
 ![Front View](./case/view_front.png)
