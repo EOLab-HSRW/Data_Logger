@@ -66,10 +66,12 @@ Then we extrude the needed areas for the sides and also the outer circles for th
 ### Step 2: Lid
 
 Next, configure the sizes for the lid as in step 1.
+
 ![Lid Sketch](./case/lid_sketch.png)
 ![Lid Sketch Flat](./case/lid_sketch_flat.png)
 
 Extrude the specified areas.
+
 ![Lid Sketch Extrude](./case/lid_sketch_extrude.png)
 
 ### Step 3: Board
@@ -84,7 +86,6 @@ Extrude the needed areas.
 ### Step 4: Outline Basement
 
 Set the sizes for the basement outline to fasten the board on the case.
-![Base Outline Sketch](./case/base_outline_sketch.png)
 ![Base Outline Sketch Flat](./case/base_outline_sketch_flat.png)
 
 Finish with an extrude of the needed areas.
