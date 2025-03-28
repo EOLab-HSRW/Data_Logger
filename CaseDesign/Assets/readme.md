@@ -1,40 +1,38 @@
 # Case Design and Model
 
-
 ## Box4u Case Details
 
 ### Base
 
-The Basement of the Case has the following specifications : 
-  -  rounded corners (radius R6)
-  -  outer dimensions of approximately 120/119.3 mm (width) and 114/113.3 mm (height) 
-  -  a width (main rectangle) of 120/119.3 mm (with a tolerance of +/- 0.35 mm) and a height of 114/113.3 mm 
-  -  a inner width (main section) of 97.2/96.5 mm, a inner height of 98 mm and depth of 4/6.5 mm 
-  -  cutouts of ø3 and ø8.5 mm
-  -  
-![Base Sketch](./case_box4u/base.png)
+The base of the case has the following specifications:
+- Rounded corners (R6)
+- Outer dimensions approximately 122/121.3 mm (width) and 120/119.3 mm (height)
+- Main rectangle dimensions: width 116/115.3 mm (with a tolerance of +/- 0.35 mm), height 114/113.3 mm
+- Inner dimensions (main section): width 97.2/96.5 mm, height 77.2/76.5 mm, depth 4/6.5 mm
+- Cutouts: ø3 mm and ø8.5 mm
 
+![Base Sketch](./case_box4u/base.png)
 
 ### Lid
 
-The Lid of the Case has the following specification: 
-  - edges of approximately 120 mm 
-  - length  of (120/119.5 mm) 
-  - about 4-5 mm wide (the difference between the outer and inner dimensions)
+The lid of the case has the following specifications:
+- Rounded corners (R6)
+- Outer dimensions 122/121.5 mm (width) and 120/119.5 mm (height)
+- Main rectangle dimensions: width 113/112.6 mm (with a tolerance of +/- 0.35 mm), height 111/110.6 mm
+- Inner dimensions (main section): width 94.2/93.8 mm, height 74.2/73.8 mm
 
 ![Lid Sketch](./case_box4u/lid.png)
 
 ### Depth
 
-The Side View reveals follwoing specifications:
-  - a total width of 15 mm and an  additional 3 mm on each side
-  - a height of 48 mm and a depth of 40 mm
-  - a total length of 2 × 7 mm + 4 mm = 18 mm. 
-  - a total height of 55 mm
-  - a width of approximately 21 mm
-  - a depth of 40 mm
-  - a maximum installation height of 48 mm 
-  - a total height of 55 mm. 
+The side view reveals the following specifications:
+
+Lid:
+- 15 mm depth including 3 mm thickness on top of the lid
+- Total height of 55 mm
+- Height without bottom and top plate thickness: 48 mm
+- 40 mm including 4 mm bottom plate for the base case
+
 ![Side View](./case_box4u/side.png)
 
 ### Screw Detail
@@ -43,6 +41,8 @@ Cylinder Screws (M4 x 24 / 10 (DIN EN ISO 7045/))
 
 ![Detail of Screw](./case_box4u/screw.png)
 
+
+---
 <! Board Sketch-->
 ![Board Sketch Top](./pcb_board/top.png)
 ![Board Sketch Bottom](./pcb_board/bottom.png)
