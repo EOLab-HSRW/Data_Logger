@@ -41,11 +41,19 @@ Cylinder Screws (M4 x 24 / 10 (DIN EN ISO 7045/))
 
 ![Detail of Screw](./case_box4u/screw.png)
 
+## RAK Base Board Details
 
----
-<! Board Sketch-->
+The board has the following specifications:
+- a main rectangle of 69 (width) to 67 (height)
+- 3 rectangular cutouts with 2x of 8mm * 14.50 and 1x 13 mm * 8mm
+- 4x screw holes  (inner raidus of ø2.5 mm) / (outer radius ø5 mm)
+
 ![Board Sketch Top](./pcb_board/top.png)
 ![Board Sketch Bottom](./pcb_board/bottom.png)
+
+
+
+## 3D Modelling in Auto Fusion 360
 
 <! Steps 1-->
 ![Base Sketch](./case/base_sketch.png)
