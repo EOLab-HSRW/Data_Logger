@@ -46,61 +46,53 @@ Cylinder Screws (M4 x 24 / 10 (DIN EN ISO 7045/))
 The board has the following specifications:
 - a main rectangle of 69 (width) to 67 (height)
 - 3 rectangular cutouts with 2x of 8mm * 14.50 and 1x 13 mm * 8mm
-- 4x screw holes  (inner raidus of ø2.5 mm) / (outer radius ø5 mm)
+- 4x screw holes (inner radius of ø2.5 mm) / (outer radius ø5 mm)
 
 ![Board Sketch Top](./pcb_board/top.png)
 ![Board Sketch Bottom](./pcb_board/bottom.png)
 
-
-
 ## 3D Modelling in Auto Fusion 360
 
-### Step 1 : Basement
+### Step 1: Basement
 
-We are starting with the sketch of the basement.
-For that we configure the sizes like mentioned earlier above.
+We start with the sketch of the basement.
+Configure the sizes as mentioned earlier above.
 ![Base Sketch](./case/base_sketch.png)
 ![Base Sketch Flat](./case/base_sketch_flat.png)
 
 Then we extrude the needed areas for the sides and also the outer circles for the screws.
 ![Base Sketch Extrude](./case/base_sketch_extrude.png)
 
+### Step 2: Lid
 
-### Step 2 : Lid
-
-Next we also configure the sizes for the lid like step 1.
+Next, configure the sizes for the lid as in step 1.
 ![Lid Sketch](./case/lid_sketch.png)
 ![Lid Sketch Flat](./case/lid_sketch_flat.png)
 
-We also extrude the specified areas.
+Extrude the specified areas.
 ![Lid Sketch Extrude](./case/lid_sketch_extrude.png)
 
+### Step 3: Board
 
-### Step 3 : Board
-
-Now continue with the rak board sketch and set the sizes as shown in the sketch.
-
+Continue with the RAK board sketch and set the sizes as shown.
 ![Board Sketch](./case/board_sketch.png)
 ![Board Sketch Flat](./case/board_sketch_flat.png)
 
-We extrude the needed areas.
+Extrude the needed areas.
 ![Board Sketch Extrude](./case/board_sketch_extrude.png)
 
+### Step 4: Outline Basement
 
-### Step 4 : Outline Basement
-
-Lastly we set the sizes for the basement outline to fasten the board on the case, which is not possible with only the board , because of missing according holes. 
-
+Set the sizes for the basement outline to fasten the board on the case.
 ![Base Outline Sketch](./case/base_outline_sketch.png)
 ![Base Outline Sketch Flat](./case/base_outline_sketch_flat.png)
 
-Then we are finishing it up with an extrude of the needed areas.
+Finish with an extrude of the needed areas.
 ![Base Outline Sketch Extrude](./case/base_outline_sketch_extrude.png)
 
+### Step 5: Results
 
-### Step 6 : Results
-The Results should be as follows:
-
+The results should be as follows:
 ![View](./case/view1.png)
 ![Top View](./case/view_top.png)
 ![Front View](./case/view_front.png)
