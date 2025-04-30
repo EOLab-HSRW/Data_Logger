@@ -1,0 +1,16 @@
+void reset(long size) {
+  // size parameter in Bytes
+  for (int i = 0; i < size; i += 256) {
+    uint8_t buffer[256];
+    memset(buffer, 0x00, 256); // Fill buffer with 0x00
+
+    // Write buffer to EEPROM
+    for (int j = 0; j < 256; j++) {
+      i2ceeprom.write(i + j, buffer[j]);
+    }
+
+    Serial.println("Writing to EEPROM: Page " + String(i / 256));
+  }
+  
+  Serial.println("Overwrite completed.");
+}
