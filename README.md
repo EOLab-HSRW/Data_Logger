@@ -188,89 +188,59 @@ Estimated battery life: approximately 4305 hours, equivalent to around 179 days 
 
 ## Data Logger Results
 
-The approach was tested in a lab environment near a
-ventilation system to demonstrate variance in sensing
-values. The data doesn’t align with the weather data
-because the carry out of the test were made in indoor
-conditions equipped with a cooling system. The mea-
-surements were executed accurately without outliers,
-extreme values, or missing data on both storage de-
-vices. The test results were reliable and fulfilled the
-requirements. The data was stored in the predefined
-format and correct sequence. No issues were faced
-during the decoding phase. The collected data was
-in a CSV format and could be analyzed by using a
-third party tool. In this project, the analysis phase
-was implemented with Jupyter Notebook. A general
-overview is provided below:
+The approach was tested in a lab environment near a ventilation system to demonstrate variance in sensing
+values. The data doesn’t align with the weather data because the carry out of the test were made in indoor
+conditions equipped with a cooling system. The measurements were executed accurately without outliers,
+extreme values, or missing data on both storage devices. The test results were reliable and fulfilled the
+requirements. The data was stored in the predefined format and correct sequence. No issues were faced
+during the decoding phase. The collected data was in a CSV format and could be analyzed by using a
+third party tool. In this project, the analysis phase was implemented with Jupyter Notebook. 
+**A general overview is provided below:**
 
 
 ### Temperature
 
-The image shows a line graph which describes the
-temperature over a period of approximately 60 hours.
-The x-axis represents the date and time, starting at
-6:00 PM on March 24 and ending at 12:00 PM on
-March 26. The y-axis shows the temperature in de-
-grees Celsius (°C), ranging from approximately 17.5
-°C to over 33 °C. A significant increase in temper-
-ature from March 24 to the afternoon of March 25,
-followed by a decrease until the morning of March
-26. On March 26, the temperature rises again at the
-end. The curve shows a typical daytime and night-
-time temperature trend with variance.
+The image shows a line graph which describes the temperature over a period of approximately 60 hours.
+The x-axis represents the date and time, starting at 6:00 PM on March 24 and ending at 12:00 PM on
+March 26. The y-axis shows the temperature in degrees Celsius (°C), ranging from approximately 17.5°C 
+to over 33 °C. A significant increase in temperature from March 24 to the afternoon of March 25,
+followed by a decrease until the morning of March 26. On March 26, the temperature rises again at the
+end. The curve shows a typical daytime and night-time temperature trend with variance.
 
 ![Temperature](./Assets/temperature.png)
 
 ### Pressure
 
-The x-axis shows the date and time, starting on
-March 24 at 6:00 PM and ending on March 26 at
-12:00 PM. The y-axis shows air pressure in hPa, with
-values between approximately 100.800 and 102.700
-hPa. There are intervals of a strong positive and
-negative variance. At the beginning of the graph,
-the air pressure shows a high value of approximately
-102.200 hPa, before raising and then falling again af-
-ter a short time. An increase is observed, peaking at
-102.600 hPa, before the pressure decreases again. At
-the end, another increase in air pressure can be seen.
+The x-axis shows the date and time, starting on March 24 at 6:00 PM and ending on March 26 at
+12:00 PM. The y-axis shows air pressure in hPa, with values between approximately 100.800 and 102.700hPa. 
+There are intervals of a strong positive and negative variance. At the beginning of the graph,
+the air pressure shows a high value of approximately 102.200 hPa, before raising and then falling again af-
+ter a short time. An increase is observed, peaking at 102.600 hPa, before the pressure decreases again. 
+At the end, another increase in air pressure can be seen.
 
 
 ![Pressure](./Assets/pressure.png)
 
 ### Humidity
 
-The horizontal axis shows the date and time from
-6:00 PM on March 24th to 12:00 PM on March 26th.
-The vertical axis shows the humidity in percent (%).
-The graph shows the humidity over time. The hu-
-midity begins on March 24th at over 44 % and then
-falls to 36 %. It slowly rises again, by reaching a
-maximum of 40 % on March 25th, and then falling
-again. At the end of the period (12:00 PM on March
-26th), the humidity falls below 40 %.
+The horizontal axis shows the date and time from 6:00 PM on March 24th to 12:00 PM on March 26th.
+The vertical axis shows the humidity in percent (%). The graph shows the humidity over time. The humidity 
+begins on March 24th at over 44 % and then falls to 36 %. It slowly rises again, by reaching a
+maximum of 40 % on March 25th, and then falling again. At the end of the period (12:00 PM on March26th), 
+the humidity falls below 40 %.
 
 ![Humidity](./Assets/humidity.png)
 
 ### Gas Resistance
 
-The x-axis shows the date and time, starting on
-March 24 at 6:00 PM and ending on March 26 at
-12:00 PM. The y-axis indicates the gas resistance
-in ohms, ranging from approximately 14,000 ohms
-to over 52,000 ohms. Starting on March 24, the
-value changes slowly and then rises sharply until
-around noon on March 25, with a peak of over 52,000
-ohms. After that, the gas resistance drops signifi-
-cantly, reaching a minimum of approximately 18,000
-ohms on the evening of March 25. On March 26,
-the value rises again, with values above 44,000 ohms.
-The curve shows a daily pattern with strong variance,
-which could be caused by changes in the environment
-like air quality. The high and low points could be
-caused by the external influence of the ventilation
-system.
+The x-axis shows the date and time, starting on March 24 at 6:00 PM and ending on March 26 at
+12:00 PM. The y-axis indicates the gas resistance in ohms, ranging from approximately 14,000 ohms
+to over 52,000 ohms. Starting on March 24, the value changes slowly and then rises sharply until
+around noon on March 25, with a peak of over 52,000 ohms. After that, the gas resistance drops significantly, 
+reaching a minimum of approximately 18,000 ohms on the evening of March 25. On March 26,
+the value rises again, with values above 44,000 ohms. The curve shows a daily pattern with strong variance,
+which could be caused by changes in the environment like air quality. The high and low points could be
+caused by the external influence of the ventilation system.
 
 ![Gas Resistance](./Assets/gasResistance.png)
 
